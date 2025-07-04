@@ -91,23 +91,6 @@ ensure POS-BuggyWagons  ← Add this line here
 {% endhint %}
 
 </details>
-
-<details>
-
-<summary><strong>⚙️ Step 4: Configure POS-BuggyWagons</strong></summary>
-
-Configure POS-BuggyWagons to your liking:
-
-1. Navigate to `resources/[POS]/POS-BuggyWagons/shared/config.lua`
-2. **Review** and **modify** the configuration settings as needed
-3. **Save** your changes
-
-{% hint style="info" %}
-**Configuration**: Review all available options in the config.lua file and adjust them to match your server's needs. This includes vehicle spawning, customization options, and interaction settings.
-{% endhint %}
-
-</details>
-
 ***
 
 ## Post-Installation Verification
