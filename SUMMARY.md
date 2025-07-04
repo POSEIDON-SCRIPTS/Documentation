@@ -1,6 +1,6 @@
 # Table of contents
 
-* [POS-Core](pos-core/README.md)
+* [POS-Core](README.md)
   * [Installation](pos-core/installation.md)
   * [Config Examples](pos-core/config-examples/README.md)
     * [config.lua](pos-core/config-examples/config.lua.md)
