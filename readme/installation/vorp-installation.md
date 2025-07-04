@@ -181,7 +181,37 @@ vorp_inventory/
 
 <details>
 
-<summary><strong>⚙️ Step 8: Configure VORP Settings</strong></summary>
+<summary><strong>🔧 Step 8: Configure Image Path</strong></summary>
+
+Configure the correct image path for VORP Framework:
+
+1. Navigate to `resources/vorp_inventory/shared/configs/config.js`
+2. **Locate** the IMAGEPATH setting:
+
+```javascript
+IMAGEPATH = "images/"
+```
+
+3. **Replace** it with the VORP-specific path:
+
+```javascript
+IMAGEPATH = "img/items/"
+```
+
+{% hint style="info" %}
+**Framework-Specific Paths:**
+
+* **VORP**: `"img/items/"`
+* **RSG**: `"images/"`
+
+Make sure the image path matches your framework for proper image loading.
+{% endhint %}
+
+</details>
+
+<details>
+
+<summary><strong>⚙️ Step 9: Configure VORP Settings</strong></summary>
 
 Enable the VORP-specific configurations:
 
@@ -208,7 +238,7 @@ Config.UseLoadoutTableVORP = true   -- Enable loadout table for weapons
 
 <details>
 
-<summary><strong>🚫 Step 9: Disable RSG Configuration</strong></summary>
+<summary><strong>🚫 Step 10: Disable RSG Configuration</strong></summary>
 
 To prevent conflicts, make sure the RSG configuration is disabled:
 
@@ -228,7 +258,7 @@ Config.RSGStores = false
 
 <details>
 
-<summary><strong>🔧 Step 10: Update Server Configuration</strong></summary>
+<summary><strong>🔧 Step 11: Update Server Configuration</strong></summary>
 
 Configure your server.cfg with the proper load order:
 
@@ -251,7 +281,7 @@ ensure POS-Core          ← Add this line here
 
 <details>
 
-<summary><strong>🔄 Step 11: Configure Data Migration (For Live Servers)</strong></summary>
+<summary><strong>🔄 Step 12: Configure Data Migration (For Live Servers)</strong></summary>
 
 If your server is live with existing players, you'll need to migrate inventory data:
 
@@ -341,7 +371,7 @@ Config.ImportInventoryVORP = false
 **Database Connection Issues**
 
 * Confirm VORP database settings are properly configured
-* Check that migration (Step 10) completed successfully
+* Check that migration (Step 12) completed successfully
 
 **Inventory Not Opening**
 
