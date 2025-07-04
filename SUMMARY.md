@@ -1,6 +1,6 @@
 # Table of contents
 
-* [Page 1](README.md)
+* [Documentation](README.md)
 
 ## Dependencies
 
@@ -128,7 +128,3 @@
   * [Config Examples](scripts/pos-zombie/config-examples/README.md)
     * [config.lua](scripts/pos-zombie/config-examples/config.lua.md)
     * [zombies.lua](scripts/pos-zombie/config-examples/zombies.lua.md)
-* [template](scripts/template/README.md)
-  * [Installation](scripts/template/installation.md)
-  * [Config Examples](scripts/template/config-examples/README.md)
-    * [config.lua](scripts/template/config-examples/config.lua.md)
