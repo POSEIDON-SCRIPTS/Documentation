@@ -25,7 +25,9 @@ Always backup your server before installing new scripts. This installation will 
 
 ### 🚀 Installation Steps
 
-#### Step 1: Prepare the POS Folder Structure
+<details>
+
+<summary><strong>Step 1: Prepare the POS Folder Structure</strong></summary>
 
 First, you need to create the proper folder structure for POS scripts:
 
@@ -43,7 +45,11 @@ server/
 **Note**: The square brackets `[POS]` are essential for proper resource categorization in RedM.
 {% endhint %}
 
-#### Step 2: Download and Install POS-Core
+</details>
+
+<details>
+
+<summary><strong>Step 2: Download and Install POS-Core</strong></summary>
 
 POS-Core is the foundation script required for POS-Inventory to function properly:
 
@@ -57,7 +63,11 @@ POS-Core is the foundation script required for POS-Inventory to function properl
 └── POS-Core/
 ```
 
-#### Step 3: Download POS-Inventory
+</details>
+
+<details>
+
+<summary><strong>Step 3: Download POS-Inventory</strong></summary>
 
 Now download the main POS-Inventory script:
 
@@ -70,6 +80,8 @@ Now download the main POS-Inventory script:
 ├── POS-Core/
 └── POS-Inventory/
 ```
+
+</details>
 
 #### Step 4: Import Database Tables
 
