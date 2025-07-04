@@ -245,7 +245,7 @@ Configure your server.cfg with the proper load order:
 
 ```cfg
 # RSG Framework
-ensure rsg_core
+ensure rsg-core
 ensure rsg-inventory
 ensure POS-Core          ← Add this line here
 ```
@@ -298,7 +298,7 @@ ensure POS-Core          ← Add this line here
 **Console Errors About Load Order**
 
 * Verify POS-Core is loaded immediately after rsg_inventory
-* Check that rsg_core loads before both scripts
+* Check that rsg-core loads before both scripts
 
 **Missing Item Images**
 
