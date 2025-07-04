@@ -1,6 +1,2 @@
----
-description: Instalation
----
-
-# POS-Inventory
+# POS-Core
 
