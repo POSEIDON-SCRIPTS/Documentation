@@ -222,9 +222,6 @@ Enable the RSG-specific configurations:
 -- RSG Framework Integration Settings
 Config.RSG = true                   -- Enable RSG framework
 Config.RSGStores = true             -- Enable RSG stores
-Config.UseMaxWeightRSG = true       -- Use max weight from config
-Config.ItemsInDatabaseRSG = true    -- Use items in database
-Config.UseLoadoutTableRSG = true    -- Enable loadout table for weapons
 ```
 
 {% hint style="info" %}
@@ -232,37 +229,13 @@ Config.UseLoadoutTableRSG = true    -- Enable loadout table for weapons
 
 * `RSG`: Set to `true` to enable RSG framework integration.
 * `RSGStores`: Set to `true` to enable RSG store functionality.
-* `UseMaxWeightRSG`: Set to `true` to use config-based weight limits.
-* `ItemsInDatabaseRSG`: Set to `true` to store items in database.
-* `UseLoadoutTableRSG`: Set to `true` to ensure weapon scripts work properly.
 {% endhint %}
 
 </details>
 
 <details>
 
-<summary><strong>🚫 Step 10: Disable VORP Configuration</strong></summary>
-
-To prevent conflicts, make sure the VORP configuration is disabled:
-
-1. Open `resources/rsg-inventory/shared/configs/config.lua`
-2. Find the following settings and ensure they are set to `false`:
-
-```lua
-Config.UseMaxWeightVORP = false
-Config.ItemsInDatabaseVORP = false
-Config.UseLoadoutTableVORP = false
-```
-
-{% hint style="warning" %}
-**Important:** All VORP-related configurations must be set to `false` for proper RSG integration.
-{% endhint %}
-
-</details>
-
-<details>
-
-<summary><strong>🔧 Step 11: Update Server Configuration</strong></summary>
+<summary><strong>� Step 10: Update Server Configuration</strong></summary>
 
 Configure your server.cfg with the proper load order:
 
@@ -280,48 +253,6 @@ ensure POS-Core          ← Add this line here
 {% hint style="warning" %}
 **Load Order is Critical:** Make sure POS-Core loads right after rsg-inventory. Check this order if you encounter console errors.
 {% endhint %}
-
-</details>
-
-<details>
-
-<summary><strong>🔄 Step 12: Configure Data Migration (For Live Servers)</strong></summary>
-
-If your server is live with existing players, you'll need to migrate inventory data:
-
-{% hint style="danger" %}
-**Live Server Warning**: Only perform this step if you have active players with existing inventories.
-{% endhint %}
-
-1. Navigate to `resources/rsg-inventory/shared/configs/config.lua`
-2. **Find** the migration setting:
-
-```lua
-Config.ImportInventoryRSG = false -- Default setting
-```
-
-3. **Replace** `false` with a command name in quotes:
-
-```lua
-Config.ImportInventoryRSG = 'loadOldInventory' -- Your chosen command
-```
-
-4. **Restart** your server
-5. **Ensure** no players are connected
-6. **Execute** the command in your server console:
-
-```
-loadOldInventory
-```
-
-7. **Wait** exactly 10 seconds for the migration to complete
-8. **Change** the setting back to `false`:
-
-```lua
-Config.ImportInventoryRSG = false
-```
-
-9. **Restart** your server again
 
 </details>
 
@@ -377,7 +308,7 @@ Config.ImportInventoryRSG = false
 **Database Connection Issues**
 
 * Confirm RSG database settings are properly configured
-* Check that migration (Step 12) completed successfully
+* Verify all required database tables were imported properly
 
 **Inventory Not Opening**
 
