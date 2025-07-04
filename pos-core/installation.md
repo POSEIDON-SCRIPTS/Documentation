@@ -312,3 +312,55 @@ Your RedM server now has the POS-Core foundation system installed and ready to s
 
 </details>
 
+***
+
+## Additional Dependencies
+
+<details>
+
+<summary><strong>📦 Required Dependencies</strong></summary>
+
+{% hint style="danger" %}
+**Important**: Regardless of your framework choice, you must install the following dependencies for POS-Core to function properly.
+{% endhint %}
+
+### Required Scripts
+
+**1. POS-ProgressBar (Free)**
+- Download from the webstore (free script)
+- Required for progress bar functionality
+
+**2. Framework Dependencies**
+Download the following 4 scripts from: https://github.com/POSEIDON-SCRIPTS/dependencies
+
+- **vorp_menu** (required even if you're NOT using VORP framework)
+- **PolyZone** (if you don't already have it)
+- **gs_gizmo** (if you don't already have it)
+- **xsound** (if you don't already have it)
+
+### Installation Instructions
+
+1. **Download** all required dependencies
+2. **Extract** and place them in your `resources` folder
+3. **Add** them to your server.cfg in the correct order:
+
+```cfg
+# Dependencies (load before POS-Core)
+ensure vorp_menu
+ensure PolyZone
+ensure gs_gizmo
+ensure xsound
+
+# Your Framework
+ensure your_framework_core
+ensure your_framework_inventory
+ensure POS-Core
+ensure POS-ProgressBar      ← Load after POS-Core
+```
+
+{% hint style="warning" %}
+**Load Order Critical**: vorp_menu, PolyZone, gs_gizmo, and xsound must load before POS-Core. POS-ProgressBar loads after POS-Core.
+{% endhint %}
+
+</details>
+
