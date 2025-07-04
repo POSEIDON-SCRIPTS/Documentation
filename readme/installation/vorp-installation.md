@@ -2,13 +2,15 @@
 
 ## POS-Inventory Installation Guide
 
-### VORP Framework Integration
+## VORP Framework
 
 Welcome to the complete installation guide for POS-Inventory with VORP Framework integration. This advanced inventory system will enhance your RedM server's inventory management capabilities while maintaining full compatibility with VORP.
 
 ***
 
 <details>
+
+## Prerequisites
 
 <summary><strong>📋 Prerequisites</strong></summary>
 
@@ -26,6 +28,9 @@ Always backup your server before installing new scripts. This installation will 
 </details>
 
 ***
+
+
+## Installation Steps
 
 <details>
 
@@ -270,6 +275,8 @@ Config.ImportInventoryVORP = false
 
 <details>
 
+## Post-Installation Verification
+
 <summary><strong>✅ Post-Installation Verification</strong></summary>
 
 #### Testing Your Installation
@@ -293,6 +300,8 @@ Config.ImportInventoryVORP = false
 ***
 
 <details>
+
+## Troubleshooting
 
 <summary><strong>🔧 Troubleshooting</strong></summary>
 
@@ -329,6 +338,8 @@ If you encounter issues not covered here:
 </details>
 
 ***
+
+## Final Notes 
 
 <details>
 
