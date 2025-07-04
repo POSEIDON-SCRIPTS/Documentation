@@ -101,7 +101,9 @@ Before proceeding with the installation, you must import the required database s
 
 #### Step 5: Backup and Remove Old Inventory
 
-\{% hint style="danger" %\} **Critical Step**: Always backup your existing inventory before proceeding! \{% endhint %\}
+{% hint style="danger" %}
+**Critical Step**: Always backup your existing inventory before proceeding!
+{% endhint %}
 
 1. **Create a backup** of your current `vorp_inventory` script
    * Copy the entire `vorp_inventory` folder to a safe location
