@@ -1,33 +1,32 @@
 # Table of contents
 
+* [Page 1](README.md)
+
 ## Dependencies
 
-* [POS-Core](README.md)
-  * [Installation](dependencies/readme/installation.md)
-  * [Config Examples](dependencies/readme/config-examples/README.md)
-    * [config.lua](dependencies/readme/config-examples/config.lua.md)
-    * [config.js](dependencies/readme/config-examples/config.js.md)
-    * [overrides.lua](dependencies/readme/config-examples/overrides.lua.md)
+* [POS-Core](dependencies/pos-core/README.md)
+  * [Installation](dependencies/pos-core/installation.md)
+  * [Config Examples](dependencies/pos-core/config-examples/README.md)
+    * [config.lua](dependencies/pos-core/config-examples/config.lua.md)
+    * [config.js](dependencies/pos-core/config-examples/config.js.md)
+    * [overrides.lua](dependencies/pos-core/config-examples/overrides.lua.md)
 
 ## Customer Scripts
 
 * [POS-BuggyWagons](customer-scripts/pos-buggywagons/README.md)
   * [Installation](customer-scripts/pos-buggywagons/installation.md)
-
-***
-
-* [POS-DataWipe](pos-datawipe/README.md)
-  * [Installation](pos-datawipe/installation.md)
-  * [Config Examples](pos-datawipe/config-examples/README.md)
-    * [config.lua](pos-datawipe/config-examples/config.lua.md)
-* [POS-DoorLocks](pos-doorlocks/README.md)
-  * [Installation](pos-doorlocks/installation.md)
-  * [Config Examples](pos-doorlocks/config-examples/README.md)
-    * [config.lua](pos-doorlocks/config-examples/config.lua.md)
-* [POS-ItemStacks](pos-itemstacks/README.md)
-  * [Installation](pos-itemstacks/installation.md)
-  * [Config Examples](pos-itemstacks/config-examples/README.md)
-    * [config.lua](pos-itemstacks/config-examples/config.lua.md)
+* [POS-DataWipe](customer-scripts/pos-datawipe/README.md)
+  * [Installation](customer-scripts/pos-datawipe/installation.md)
+  * [Config Examples](customer-scripts/pos-datawipe/config-examples/README.md)
+    * [config.lua](customer-scripts/pos-datawipe/config-examples/config.lua.md)
+* [POS-DoorLocks](customer-scripts/pos-doorlocks/README.md)
+  * [Installation](customer-scripts/pos-doorlocks/installation.md)
+  * [Config Examples](customer-scripts/pos-doorlocks/config-examples/README.md)
+    * [config.lua](customer-scripts/pos-doorlocks/config-examples/config.lua.md)
+* [POS-ItemStacks](customer-scripts/pos-itemstacks/README.md)
+  * [Installation](customer-scripts/pos-itemstacks/installation.md)
+  * [Config Examples](customer-scripts/pos-itemstacks/config-examples/README.md)
+    * [config.lua](customer-scripts/pos-itemstacks/config-examples/config.lua.md)
 
 ## Scripts
 

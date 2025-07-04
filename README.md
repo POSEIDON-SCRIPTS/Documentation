@@ -1,6 +1,2 @@
----
-description: Instalation
----
-
-# POS-Core
+# Page 1
 
