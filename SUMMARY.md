@@ -6,7 +6,7 @@
     * [config.lua](pos-core/config-examples/config.lua.md)
     * [config.js](pos-core/config-examples/config.js.md)
     * [overrides.lua](pos-core/config-examples/overrides.lua.md)
-* [POS-Inventory](<README (1).md>)
+* [POS-Inventory](pos-inventory/README.md)
   * [Installation](pos-inventory/installation/README.md)
     * [VORP Installation](pos-inventory/installation/vorp-installation.md)
     * [RSG Installation](pos-inventory/installation/rsg-installation.md)

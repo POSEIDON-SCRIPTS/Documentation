@@ -1,4 +1,4 @@
-# POS-Core Installation Guide
+# Installation
 
 ## POS-Core Foundation System
 
@@ -9,6 +9,7 @@ Welcome to the complete installation guide for POS-Core. This foundation system 
 ***
 
 ## Prerequisites
+
 <details>
 
 <summary><strong>📋 Prerequisites</strong></summary>
@@ -116,29 +117,34 @@ framework "vorp" -- USE vorp/rsg/redemrp/custom
 ```
 
 **Available Framework Options:**
-- `"vorp"` - For VORP Framework
-- `"rsg"` - For RSG Framework  
-- `"redemrp"` - For RedEM:RP Framework
-- `"custom"` - For Custom Framework Integration
+
+* `"vorp"` - For VORP Framework
+* `"rsg"` - For RSG Framework
+* `"redemrp"` - For RedEM:RP Framework
+* `"custom"` - For Custom Framework Integration
 
 **Examples:**
 
 **For VORP Framework:**
+
 ```lua
 framework "vorp"
 ```
 
 **For RSG Framework:**
+
 ```lua
 framework "rsg"
 ```
 
 **For RedEM:RP Framework:**
+
 ```lua
 framework "redemrp"
 ```
 
 **For Custom Framework:**
+
 ```lua
 framework "custom"
 ```
@@ -156,21 +162,25 @@ framework "custom"
 POS-Core provides several configuration options for advanced users:
 
 **Main Configuration File:**
+
 * Navigate to `resources/[POS]/POS-Core/shared/config.lua`
 * This file contains the main configuration settings for POS-Core
 
 **Custom Framework Integration:**
+
 * If you want to use a custom framework, navigate to `resources/[POS]/POS-Core/server/customFramework.lua`
 * Edit this file to integrate with your custom framework
 * Make sure to set the framework to `'Custom'` in the fxmanifest.lua
 
 **Override Default Framework Settings:**
+
 * Navigate to `resources/[POS]/POS-Core/shared/overrides.lua`
 * Use this file to override default framework settings without modifying core files
 * This allows you to customize framework behavior while keeping updates clean
 
 {% hint style="info" %}
 **Configuration Priority:**
+
 1. **fxmanifest.lua**: Select your framework
 2. **config.lua**: Main configuration settings
 3. **overrides.lua**: Override default framework settings
@@ -189,6 +199,7 @@ Configure your server.cfg with the proper load order:
 2. **Add** `ensure POS-Core` directly after your framework core and inventory:
 
 **For VORP Framework:**
+
 ```cfg
 # VORP Framework
 ensure vorp_core
@@ -197,6 +208,7 @@ ensure POS-Core          ← Add this line here
 ```
 
 **For RSG Framework:**
+
 ```cfg
 # RSG Framework
 ensure rsg-core
@@ -205,6 +217,7 @@ ensure POS-Core          ← Add this line here
 ```
 
 **For RedEM:RP Framework:**
+
 ```cfg
 # RedEM:RP Framework
 ensure redemrp_core
@@ -221,11 +234,12 @@ ensure POS-Core          ← Add this line here
 ***
 
 ## Post-Installation Verification
+
 <details>
 
 <summary><strong>✅ Post-Installation Verification</strong></summary>
 
-#### Testing Your Installation
+**Testing Your Installation**
 
 1. **Start your server** and monitor the console for errors
 2. **Join with a test character** and verify:
@@ -233,7 +247,7 @@ ensure POS-Core          ← Add this line here
    * Framework integration working properly
    * Database connections established
 
-#### Common Success Indicators
+**Common Success Indicators**
 
 * ✅ No console errors related to POS-Core
 * ✅ Framework integration messages appear in console
@@ -250,7 +264,7 @@ ensure POS-Core          ← Add this line here
 
 <summary><strong>🔧 Troubleshooting</strong></summary>
 
-#### Common Issues
+**Common Issues**
 
 **Console Errors About Load Order**
 
@@ -271,7 +285,7 @@ ensure POS-Core          ← Add this line here
 * If using "custom", verify server/customFramework.lua is properly configured
 * Check shared/overrides.lua for any conflicting settings
 
-#### Getting Support
+**Getting Support**
 
 If you encounter issues not covered here:
 
@@ -283,25 +297,25 @@ If you encounter issues not covered here:
 
 ***
 
-## Final Notes 
+## Final Notes
 
 <details>
 
-<summary><strong>📝 Final Notes & Next Steps</strong></summary>
+<summary><strong>📝 Final Notes &#x26; Next Steps</strong></summary>
 
 {% hint style="success" %}
 **Installation Complete!**\
 Your POS-Core foundation system is now installed and ready for use.
 {% endhint %}
 
-#### Important Reminders
+**Important Reminders**
 
 * POS-Core must be installed before any other POS scripts
 * Keep your database backup safe for recovery purposes
 * Monitor server performance after installation
 * Regular backups are essential for server stability
 
-#### Next Steps
+**Next Steps**
 
 * Install other POS scripts (like POS-Inventory)
 * Configure script-specific settings as needed
@@ -324,21 +338,21 @@ Your RedM server now has the POS-Core foundation system installed and ready to s
 **Important**: Regardless of your framework choice, you must install the following dependencies for POS-Core to function properly.
 {% endhint %}
 
-### Required Scripts
+#### Required Scripts
 
 **1. POS-ProgressBar (Free)**
-- Download from the webstore (free script)
-- Required for progress bar functionality
 
-**2. Framework Dependencies**
-Download the following 4 scripts from: https://github.com/POSEIDON-SCRIPTS/dependencies
+* Download from the webstore (free script)
+* Required for progress bar functionality
 
-- **vorp_menu** (required even if you're NOT using VORP framework)
-- **PolyZone** (if you don't already have it)
-- **gs_gizmo** (if you don't already have it)
-- **xsound** (if you don't already have it)
+**2. Framework Dependencies** Download the following 4 scripts from: [https://github.com/POSEIDON-SCRIPTS/dependencies](https://github.com/POSEIDON-SCRIPTS/dependencies)
 
-### Installation Instructions
+* **vorp\_menu** (required even if you're NOT using VORP framework)
+* **PolyZone** (if you don't already have it)
+* **gs\_gizmo** (if you don't already have it)
+* **xsound** (if you don't already have it)
+
+#### Installation Instructions
 
 1. **Download** all required dependencies
 2. **Extract** and place them in your `resources` folder
@@ -359,8 +373,7 @@ ensure POS-ProgressBar      ← Load after POS-Core
 ```
 
 {% hint style="warning" %}
-**Load Order Critical**: vorp_menu, PolyZone, gs_gizmo, and xsound must load before POS-Core. POS-ProgressBar loads after POS-Core.
+**Load Order Critical**: vorp\_menu, PolyZone, gs\_gizmo, and xsound must load before POS-Core. POS-ProgressBar loads after POS-Core.
 {% endhint %}
 
 </details>
-
