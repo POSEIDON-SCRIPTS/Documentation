@@ -18,3 +18,7 @@
   * [Installation](pos-alerts/installation.md)
   * [Config Examples](pos-alerts/config-examples/README.md)
     * [config.lua](pos-alerts/config-examples/config.lua.md)
+* [POS-Backpacks](pos-backpacks/README.md)
+  * [Installation](pos-backpacks/installation.md)
+  * [Config Examples](pos-backpacks/config-examples/README.md)
+    * [config.lua](pos-backpacks/config-examples/config.lua.md)
