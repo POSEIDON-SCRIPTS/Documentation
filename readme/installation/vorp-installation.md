@@ -1,4 +1,4 @@
-# VORP Installation
+# VORP Installation Guide
 
 ## POS-Inventory Installation Guide
 
@@ -8,7 +8,9 @@ Welcome to the complete installation guide for POS-Inventory with VORP Framework
 
 ***
 
-### 📋 Prerequisites
+<details>
+
+<summary><strong>📋 Prerequisites</strong></summary>
 
 Before beginning the installation process, ensure you have:
 
@@ -18,16 +20,16 @@ Before beginning the installation process, ensure you have:
 * **Recent server backup** (highly recommended)
 
 {% hint style="warning" %}
-Always backup your server before installing new scripts. This installation will replace your existing vorp\_inventory script.
+Always backup your server before installing new scripts. This installation will replace your existing vorp_inventory script.
 {% endhint %}
+
+</details>
 
 ***
 
-### 🚀 Installation Steps
-
 <details>
 
-<summary><strong>Step 1: Prepare the POS Folder Structure</strong></summary>
+<summary><strong>🚀 Step 1: Prepare the POS Folder Structure</strong></summary>
 
 First, you need to create the proper folder structure for POS scripts:
 
@@ -49,7 +51,7 @@ server/
 
 <details>
 
-<summary><strong>Step 2: Download and Install POS-Core</strong></summary>
+<summary><strong>📦 Step 2: Download and Install POS-Core</strong></summary>
 
 POS-Core is the foundation script required for POS-Inventory to function properly:
 
@@ -67,7 +69,7 @@ POS-Core is the foundation script required for POS-Inventory to function properl
 
 <details>
 
-<summary><strong>Step 3: Download POS-Inventory</strong></summary>
+<summary><strong>📥 Step 3: Download POS-Inventory</strong></summary>
 
 Now download the main POS-Inventory script:
 
@@ -83,7 +85,9 @@ Now download the main POS-Inventory script:
 
 </details>
 
-#### Step 4: Import Database Tables
+<details>
+
+<summary><strong>🗄️ Step 4: Import Database Tables</strong></summary>
 
 {% hint style="danger" %}
 **Critical Database Step**: The script requires specific database tables to function properly.
@@ -111,7 +115,11 @@ Before proceeding with the installation, you must import the required database s
 * Look for tables with names starting with `pos_` or similar
 * Ensure no errors occurred during the import process
 
-#### Step 5: Backup and Remove Old Inventory
+</details>
+
+<details>
+
+<summary><strong>🗂️ Step 5: Backup and Remove Old Inventory</strong></summary>
 
 {% hint style="danger" %}
 **Critical Step**: Always backup your existing inventory before proceeding!
@@ -123,7 +131,11 @@ Before proceeding with the installation, you must import the required database s
 2. **Remove the old script** from your resources folder
    * Delete or move the existing `vorp_inventory` folder from `resources/`
 
-#### Step 6: Rename POS-Inventory
+</details>
+
+<details>
+
+<summary><strong>🔄 Step 6: Rename POS-Inventory</strong></summary>
 
 This step integrates POS-Inventory as your new inventory system:
 
@@ -138,7 +150,11 @@ resources/
 └── vorp_inventory/     ← Renamed POS-Inventory folder
 ```
 
-#### Step 7: Setup Item Images
+</details>
+
+<details>
+
+<summary><strong>🖼️ Step 7: Setup Item Images</strong></summary>
 
 Configure the inventory images for your items:
 
@@ -156,7 +172,11 @@ vorp_inventory/
             └── ...
 ```
 
-#### Step 8: Configure VORP Settings
+</details>
+
+<details>
+
+<summary><strong>⚙️ Step 8: Configure VORP Settings</strong></summary>
 
 Enable the VORP-specific configurations:
 
@@ -179,7 +199,11 @@ Config.UseLoadoutTableVORP = true   -- Enable loadout table for weapons
 * `UseLoadoutTableVORP`: Set to `true` to ensure weapon scripts work properly.
 {% endhint %}
 
-#### Step 9: Update Server Configuration
+</details>
+
+<details>
+
+<summary><strong>🔧 Step 9: Update Server Configuration</strong></summary>
 
 Configure your server.cfg with the proper load order:
 
@@ -195,10 +219,14 @@ ensure POS-Core          ← Add this line here
 ```
 
 {% hint style="warning" %}
-**Load Order is Critical:** Make sure POS-Core loads right after vorp\_inventory. Check this order if you encounter console errors.
+**Load Order is Critical:** Make sure POS-Core loads right after vorp_inventory. Check this order if you encounter console errors.
 {% endhint %}
 
-#### Step 10: Configure Data Migration (For Live Servers)
+</details>
+
+<details>
+
+<summary><strong>🔄 Step 10: Configure Data Migration (For Live Servers)</strong></summary>
 
 If your server is live with existing players, you'll need to migrate inventory data:
 
@@ -236,9 +264,13 @@ Config.ImportInventoryVORP = false
 
 9. **Restart** your server again
 
+</details>
+
 ***
 
-### ✅ Post-Installation Verification
+<details>
+
+<summary><strong>✅ Post-Installation Verification</strong></summary>
 
 #### Testing Your Installation
 
@@ -251,21 +283,25 @@ Config.ImportInventoryVORP = false
 
 #### Common Success Indicators
 
-* ✅ No console errors related to POS-Core or vorp\_inventory
+* ✅ No console errors related to POS-Core or vorp_inventory
 * ✅ Inventory UI loads without issues
 * ✅ Item images display correctly
 * ✅ Player inventories persist after server restart
 
+</details>
+
 ***
 
-### 🔧 Troubleshooting
+<details>
+
+<summary><strong>🔧 Troubleshooting</strong></summary>
 
 #### Common Issues
 
 **Console Errors About Load Order**
 
-* Verify POS-Core is loaded immediately after vorp\_inventory
-* Check that vorp\_core loads before both scripts
+* Verify POS-Core is loaded immediately after vorp_inventory
+* Check that vorp_core loads before both scripts
 
 **Missing Item Images**
 
@@ -275,7 +311,7 @@ Config.ImportInventoryVORP = false
 **Database Connection Issues**
 
 * Confirm VORP database settings are properly configured
-* Check that migration (Step 9) completed successfully
+* Check that migration (Step 10) completed successfully
 
 **Inventory Not Opening**
 
@@ -290,9 +326,13 @@ If you encounter issues not covered here:
 2. **Verify Steps**: Ensure each installation step was completed
 3. **Contact Support**: Reach out with console logs and specific error descriptions
 
+</details>
+
 ***
 
-### 📝 Final Notes
+<details>
+
+<summary><strong>📝 Final Notes & Next Steps</strong></summary>
 
 {% hint style="success" %}
 **Installation Complete!**\
@@ -301,7 +341,7 @@ Your POS-Inventory system is now integrated with VORP Framework and ready for us
 
 #### Important Reminders
 
-* Keep your backup of the original vorp\_inventory script
+* Keep your backup of the original vorp_inventory script
 * Monitor server performance after installation
 * Update item images as needed for new items
 * Regular backups are essential for server stability
@@ -313,3 +353,5 @@ Your POS-Inventory system is now integrated with VORP Framework and ready for us
 * Customize the UI to match your server's theme
 
 Your RedM server now has a powerful, VORP-integrated inventory system that will enhance the player experience significantly!
+
+</details>
