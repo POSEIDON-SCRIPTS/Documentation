@@ -146,13 +146,13 @@ This step integrates POS-Inventory as your new inventory system:
 
 1. Navigate to your `[POS]` folder
 2. **Rename** the `POS-Inventory` folder to `rsg-inventory`
-3. **Move** the renamed folder from `[POS]/` to your main `resources/` directory
+3. **Keep** the renamed folder inside the `[POS]` directory
 
 ```
 resources/
-├── [POS]/
-│   └── POS-Core/
-└── rsg-inventory/     ← Renamed POS-Inventory folder
+└── [POS]/
+   ├── POS-Core/
+   └── rsg-inventory/     ← Renamed POS-Inventory folder stays here
 ```
 
 </details>
@@ -163,17 +163,18 @@ resources/
 
 Configure the inventory images for your items:
 
-1. Navigate to `resources/rsg-inventory/html/`
+1. Navigate to `resources/[POS]/rsg-inventory/html/`
 2. **Create** a new folder called `images`
 3. **Transfer** all your inventory item images into this new `images` folder
 
 ```
-rsg-inventory/
-└── html/
-   └── images/         ← Create this folder
-      ├── apple.png
-      ├── bread.png
-      └── ...
+[POS]/
+└── rsg-inventory/
+   └── html/
+      └── images/         ← Create this folder
+         ├── apple.png
+         ├── bread.png
+         └── ...
 ```
 
 </details>
@@ -184,7 +185,7 @@ rsg-inventory/
 
 Configure the correct image path for RSG Framework:
 
-1. Navigate to `resources/rsg-inventory/shared/configs/config.js`
+1. Navigate to `resources/[POS]/rsg-inventory/shared/configs/config.js`
 2. **Locate** the IMAGEPATH setting:
 
 ```javascript
@@ -214,7 +215,7 @@ Make sure the image path matches your framework for proper image loading.
 
 Enable the RSG-specific configurations:
 
-1. Navigate to `resources/rsg-inventory/shared/configs/config.lua`
+1. Navigate to `resources/[POS]/rsg-inventory/shared/configs/config.lua`
 2. **Locate** the RSG configuration section
 3. **Update** the following settings:
 
@@ -297,12 +298,12 @@ ensure POS-Core          ← Add this line here
 
 **Console Errors About Load Order**
 
-* Verify POS-Core is loaded immediately after rsg_inventory
+* Verify POS-Core is loaded immediately after rsg-inventory
 * Check that rsg-core loads before both scripts
 
 **Missing Item Images**
 
-* Ensure the `images` folder exists in `html/`
+* Ensure the `images` folder exists in `[POS]/rsg-inventory/html/`
 * Verify image file names match your database entries
 
 **Database Connection Issues**
@@ -312,7 +313,7 @@ ensure POS-Core          ← Add this line here
 
 **Inventory Not Opening**
 
-* Verify the script renamed correctly to `rsg-inventory`
+* Verify the script renamed correctly to `rsg-inventory` inside `[POS]`
 * Check console for JavaScript/Lua errors
 
 **RSG Store Issues**

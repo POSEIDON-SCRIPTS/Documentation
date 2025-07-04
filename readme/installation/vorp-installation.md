@@ -146,13 +146,13 @@ This step integrates POS-Inventory as your new inventory system:
 
 1. Navigate to your `[POS]` folder
 2. **Rename** the `POS-Inventory` folder to `vorp_inventory`
-3. **Move** the renamed folder from `[POS]/` to your main `resources/` directory
+3. **Keep** the renamed folder inside the `[POS]` directory
 
 ```
 resources/
-├── [POS]/
-│   └── POS-Core/
-└── vorp_inventory/     ← Renamed POS-Inventory folder
+└── [POS]/
+   ├── POS-Core/
+   └── vorp_inventory/     ← Renamed POS-Inventory folder stays here
 ```
 
 </details>
@@ -163,18 +163,19 @@ resources/
 
 Configure the inventory images for your items:
 
-1. Navigate to `resources/vorp_inventory/html/img/`
+1. Navigate to `resources/[POS]/vorp_inventory/html/img/`
 2. **Create** a new folder called `items`
 3. **Transfer** all your inventory item images into this new `items` folder
 
 ```
-vorp_inventory/
-└── html/
-   └── img/
-      └── items/      ← Create this folder
-         ├── apple.png
-         ├── bread.png
-         └── ...
+[POS]/
+└── vorp_inventory/
+   └── html/
+      └── img/
+         └── items/      ← Create this folder
+            ├── apple.png
+            ├── bread.png
+            └── ...
 ```
 
 </details>
@@ -185,7 +186,7 @@ vorp_inventory/
 
 Configure the correct image path for VORP Framework:
 
-1. Navigate to `resources/vorp_inventory/shared/configs/config.js`
+1. Navigate to `resources/[POS]/vorp_inventory/shared/configs/config.js`
 2. **Locate** the IMAGEPATH setting:
 
 ```javascript
@@ -215,7 +216,7 @@ Make sure the image path matches your framework for proper image loading.
 
 Enable the VORP-specific configurations:
 
-1. Navigate to `resources/vorp_inventory/shared/configs/config.lua`
+1. Navigate to `resources/[POS]/vorp_inventory/shared/configs/config.lua`
 2. **Locate** the VORP configuration section
 3. **Update** the following settings:
 
@@ -242,7 +243,7 @@ Config.UseLoadoutTableVORP = true   -- Enable loadout table for weapons
 
 To prevent conflicts, make sure the RSG configuration is disabled:
 
-1. Open `resources/vorp_inventory/shared/configs/config.lua`
+1. Open `resources/[POS]/vorp_inventory/shared/configs/config.lua`
 2. Find the following settings and ensure they are set to `false`:
 
 ```lua
@@ -289,7 +290,7 @@ If your server is live with existing players, you'll need to migrate inventory d
 **Live Server Warning**: Only perform this step if you have active players with existing inventories.
 {% endhint %}
 
-1. Navigate to `resources/vorp_inventory/shared/configs/config.lua`
+1. Navigate to `resources/[POS]/vorp_inventory/shared/configs/config.lua`
 2. **Find** the migration setting:
 
 ```lua
@@ -365,7 +366,7 @@ Config.ImportInventoryVORP = false
 
 **Missing Item Images**
 
-* Ensure the `items` folder exists in `html/img/`
+* Ensure the `items` folder exists in `[POS]/vorp_inventory/html/img/`
 * Verify image file names match your database entries
 
 **Database Connection Issues**
@@ -375,7 +376,7 @@ Config.ImportInventoryVORP = false
 
 **Inventory Not Opening**
 
-* Verify the script renamed correctly to `vorp_inventory`
+* Verify the script renamed correctly to `vorp_inventory` inside `[POS]`
 * Check console for JavaScript/Lua errors
 
 #### Getting Support
