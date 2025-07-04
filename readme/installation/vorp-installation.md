@@ -273,9 +273,9 @@ Config.ImportInventoryVORP = false
 
 ***
 
+## Post-Installation Verification
 <details>
 
-## Post-Installation Verification
 
 <summary><strong>✅ Post-Installation Verification</strong></summary>
 
@@ -299,9 +299,10 @@ Config.ImportInventoryVORP = false
 
 ***
 
+## Troubleshooting
+
 <details>
 
-## Troubleshooting
 
 <summary><strong>🔧 Troubleshooting</strong></summary>
 
