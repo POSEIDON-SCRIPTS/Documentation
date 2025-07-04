@@ -8,9 +8,9 @@ Welcome to the complete installation guide for POS-Inventory with VORP Framework
 
 ***
 
+## Prerequisites
 <details>
 
-## Prerequisites
 
 <summary><strong>📋 Prerequisites</strong></summary>
 
