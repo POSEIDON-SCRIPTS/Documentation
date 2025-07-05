@@ -144,6 +144,7 @@ Config.BucketItems = {
     ['galeata_goala'] = {
         value = 50, -- water to increase
         uses = 3, -- how many times can you water a plant before it is empty
+        durability = 10, -- durability of the bucket or false to disable it, when gettin water it will decrease the durability by 1, when it reaches 0, the bucket will be destroyed
     }
 }
 
@@ -170,6 +171,7 @@ Config.Settings = {
     harvestDefaultPlants = true, -- if true, you can harvest the default in game plants
     minimumWater = 0, -- minimum water for the plant to grow, if the water is below this value, the plant will not grow
     durationPlantDieZeroWater = 1800, -- 30 minutes, time for the plant to die if it has no water or false to disable it
+    requireCrouch = false, -- if true, you need to crouch to interact with wagons when holding bucket
 }
 
 Config.Distances = {
@@ -777,6 +779,8 @@ Config.Text = {
         ['plant_already_fertilized'] = 'This plant has already been fertilized to the maximum.',
         ['water_bucket_prompt'] = 'Water bucket. (Uses: %s/%s)',
         ['water_wagon_fully_filled'] = 'The wagon was fully filled and now it has %s water.',
+        ['bucket_broken'] = 'The bucket has broken!',
+        ['bucket_desc'] = 'Durability: %s/%s',
     },
 }
 
