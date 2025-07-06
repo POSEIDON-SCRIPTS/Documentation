@@ -52,6 +52,8 @@
   * [Installation](scripts/pos-alerts/installation.md)
   * [Config Examples](scripts/pos-alerts/config-examples/README.md)
     * [config.lua](scripts/pos-alerts/config-examples/config.lua.md)
+  * [Exports](scripts/pos-alerts/exports/README.md)
+    * [Server](scripts/pos-alerts/exports/server.md)
 * [POS-Backpacks](scripts/pos-backpacks/README.md)
   * [Installation](scripts/pos-backpacks/installation.md)
   * [Config Examples](scripts/pos-backpacks/config-examples/README.md)
