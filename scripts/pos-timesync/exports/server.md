@@ -39,23 +39,21 @@ The export can return the following weather types:
 | Weather Type | Description |
 |--------------|-------------|
 | `SUNNY` | Clear sunny weather |
-| `CLEAR` | Clear sky |
 | `CLOUDS` | Cloudy weather |
-| `OVERCAST` | Overcast sky |
-| `RAIN` | Light rain |
-| `DRIZZLE` | Light drizzle |
-| `THUNDER` | Thunderstorm |
-| `RAIN_LIGHT` | Light rain |
-| `THUNDER_LIGHT` | Light thunderstorm |
-| `SNOW` | Snow weather |
-| `BLIZZARD` | Heavy snow/blizzard |
-| `SNOW_LIGHT` | Light snow |
-| `XMAS` | Christmas weather |
-| `HALLOWEEN` | Halloween weather |
-| `FOG` | Foggy weather |
 | `MISTY` | Misty conditions |
-| `SANDSTORM` | Sandstorm weather |
+| `FOG` | Foggy weather |
+| `OVERCASTDARK` | Dark overcast sky |
+| `OVERCAST` | Overcast sky |
+| `THUNDER` | Thunderstorm |
+| `THUNDERSTORM` | Heavy thunderstorm |
+| `DRIZZLE` | Light drizzle |
+| `RAIN` | Rain weather |
+| `SHOWER` | Heavy rain shower |
 | `HURRICANE` | Hurricane conditions |
+| `SNOWLIGHT` | Light snow |
+| `SNOW` | Snow weather |
+| `GROUNDBLIZZARD` | Ground-level blizzard |
+| `SANDSTORM` | Sandstorm weather |
 
 ### Examples
 
@@ -67,7 +65,7 @@ local currentWeather = exports['POS-TimeSync']:GetWeather()
 print("Current weather: " .. currentWeather)
 
 -- Use weather in your script logic
-if currentWeather == "RAIN" then
+if currentWeather == "RAIN" or currentWeather == "SHOWER" then
     -- Handle rain-specific logic
     TriggerClientEvent('pos-farming:setGrowthBonus', -1, 1.5)
 elseif currentWeather == "SUNNY" then
@@ -104,13 +102,13 @@ AddEventHandler('pos-farming:checkWeatherConditions', function(cropType, locatio
     local growthMultiplier = 1.0
     local damageChance = 0
     
-    if weather == "RAIN" or weather == "DRIZZLE" then
+    if weather == "RAIN" or weather == "DRIZZLE" or weather == "SHOWER" then
         growthMultiplier = 1.5  -- 50% faster growth in rain
     elseif weather == "SUNNY" then
         growthMultiplier = 1.2  -- 20% faster growth in sun
-    elseif weather == "THUNDER" or weather == "HURRICANE" then
+    elseif weather == "THUNDER" or weather == "THUNDERSTORM" or weather == "HURRICANE" then
         damageChance = 0.3  -- 30% chance of crop damage
-    elseif weather == "SNOW" or weather == "BLIZZARD" then
+    elseif weather == "SNOW" or weather == "SNOWLIGHT" or weather == "GROUNDBLIZZARD" then
         growthMultiplier = 0.5  -- 50% slower growth in cold
         damageChance = 0.2  -- 20% chance of frost damage
     end
@@ -174,19 +172,19 @@ local function canPerformActivity(activityType, location)
     
     local restrictions = {
         fishing = {
-            allowed = {"SUNNY", "CLEAR", "CLOUDS", "OVERCAST", "RAIN", "DRIZZLE"},
-            bonus = {"RAIN", "DRIZZLE"},  -- Better fishing in rain
-            penalty = {"THUNDER", "HURRICANE", "BLIZZARD"}
+            allowed = {"SUNNY", "CLOUDS", "OVERCAST", "OVERCASTDARK", "RAIN", "DRIZZLE", "SHOWER"},
+            bonus = {"RAIN", "DRIZZLE", "SHOWER"},  -- Better fishing in rain
+            penalty = {"THUNDER", "THUNDERSTORM", "HURRICANE", "GROUNDBLIZZARD"}
         },
         hunting = {
-            allowed = {"SUNNY", "CLEAR", "CLOUDS", "OVERCAST", "FOG", "MISTY"},
+            allowed = {"SUNNY", "CLOUDS", "OVERCAST", "OVERCASTDARK", "FOG", "MISTY"},
             bonus = {"FOG", "MISTY"},  -- Better hunting in fog
-            penalty = {"RAIN", "THUNDER", "SNOW", "BLIZZARD"}
+            penalty = {"RAIN", "THUNDER", "THUNDERSTORM", "SNOW", "GROUNDBLIZZARD"}
         },
         mining = {
-            allowed = {"SUNNY", "CLEAR", "CLOUDS", "OVERCAST", "RAIN", "DRIZZLE", "SNOW"},
+            allowed = {"SUNNY", "CLOUDS", "OVERCAST", "OVERCASTDARK", "RAIN", "DRIZZLE", "SNOW", "SNOWLIGHT"},
             bonus = {},
-            penalty = {"THUNDER", "HURRICANE", "BLIZZARD", "SANDSTORM"}
+            penalty = {"THUNDER", "THUNDERSTORM", "HURRICANE", "GROUNDBLIZZARD", "SANDSTORM"}
         }
     }
     
@@ -266,12 +264,17 @@ Citizen.CreateThread(function()
             -- Weather changed, notify all players
             local weatherMessages = {
                 RAIN = "It's starting to rain. Find shelter!",
+                SHOWER = "Heavy rain is falling. Take cover!",
                 THUNDER = "A thunderstorm is approaching. Take cover!",
+                THUNDERSTORM = "A heavy thunderstorm is here. Find shelter immediately!",
                 SNOW = "Snow is beginning to fall.",
-                BLIZZARD = "A blizzard is incoming! Seek immediate shelter!",
+                SNOWLIGHT = "Light snow is starting to fall.",
+                GROUNDBLIZZARD = "A ground blizzard is incoming! Seek immediate shelter!",
                 SUNNY = "The weather is clearing up.",
                 SANDSTORM = "A sandstorm is approaching. Find shelter immediately!",
-                HURRICANE = "Hurricane conditions detected! Take immediate shelter!"
+                HURRICANE = "Hurricane conditions detected! Take immediate shelter!",
+                FOG = "Fog is rolling in. Visibility is reduced.",
+                MISTY = "Misty conditions are developing."
             }
             
             local message = weatherMessages[currentWeather] or "Weather conditions are changing."
@@ -286,6 +289,62 @@ Citizen.CreateThread(function()
         lastWeather = currentWeather
     end
 end)
+```
+
+#### Weather-Based Damage
+
+```lua
+-- Example: Environmental damage based on weather
+local function applyWeatherDamage(playerId)
+    local weather = exports['POS-TimeSync']:GetWeather()
+    
+    local damages = {
+        GROUNDBLIZZARD = 3,  -- 3 damage in ground blizzard
+        SANDSTORM = 4,       -- 4 damage in sandstorm
+        HURRICANE = 5,       -- 5 damage in hurricane
+        THUNDERSTORM = 2     -- 2 damage in thunderstorm
+    }
+    
+    local damage = damages[weather]
+    if damage then
+        TriggerClientEvent('pos-health:takeDamage', playerId, damage, 'environmental')
+    end
+end
+```
+
+#### Weather-Based Spawn Rates
+
+```lua
+-- Example: Animal spawn rates based on weather
+local function getWeatherSpawnMultiplier(animalType)
+    local weather = exports['POS-TimeSync']:GetWeather()
+    
+    local multipliers = {
+        deer = {
+            RAIN = 0.8,
+            SHOWER = 0.7,
+            SUNNY = 1.2,
+            SNOW = 0.6,
+            SNOWLIGHT = 0.8
+        },
+        bear = {
+            RAIN = 1.3,
+            SHOWER = 1.2,
+            SUNNY = 0.9,
+            SNOW = 0.7,
+            FOG = 1.4
+        },
+        rabbit = {
+            RAIN = 0.7,
+            SHOWER = 0.6,
+            SUNNY = 1.1,
+            SNOW = 0.5,
+            MISTY = 1.2
+        }
+    }
+    
+    return multipliers[animalType] and multipliers[animalType][weather] or 1.0
+end
 ```
 
 ### Configuration Dependencies
