@@ -16,13 +16,14 @@ Welcome to the complete installation guide for POS-Housing. This advanced proper
 Before beginning the installation process, ensure you have:
 
 * **POS-Core** properly installed and running (required)
+* **POS-DoorLocks** properly installed and running (required)
 * **Server access** with file modification permissions
 * **Keymaster** access for script downloads
 * **Recent server backup** (highly recommended)
 * **Database access** for table import
 
 {% hint style="danger" %}
-**Critical Requirement**: POS-Core must be installed before POS-Housing. POS-Housing depends on POS-Core for core functionality.
+**Critical Requirements**: Both POS-Core and POS-DoorLocks must be installed before POS-Housing. POS-Housing depends on both scripts for core functionality and door management.
 {% endhint %}
 
 </details>
@@ -33,22 +34,23 @@ Before beginning the installation process, ensure you have:
 
 <details>
 
-<summary><strong>🚀 Step 1: Verify POS-Core Installation</strong></summary>
+<summary><strong>🚀 Step 1: Verify POS Dependencies Installation</strong></summary>
 
-Before installing POS-Housing, ensure POS-Core is properly installed:
+Before installing POS-Housing, ensure both required dependencies are properly installed:
 
 1. Navigate to your `resources/[POS]/` folder
-2. Verify that `POS-Core` folder exists
-3. Check that POS-Core is running without errors in your server console
+2. Verify that both `POS-Core` and `POS-DoorLocks` folders exist
+3. Check that both scripts are running without errors in your server console
 
 ```
 resources/
 └── [POS]/
-   └── POS-Core/        ← This must exist
+   ├── POS-Core/        ← This must exist
+   └── POS-DoorLocks/   ← This must also exist
 ```
 
 {% hint style="warning" %}
-**Important**: If POS-Core is not installed, please install it first before proceeding with POS-Housing.
+**Important**: If either POS-Core or POS-DoorLocks is not installed, please install them first before proceeding with POS-Housing. POS-Housing requires both dependencies for proper door management and core functionality.
 {% endhint %}
 
 </details>
@@ -67,6 +69,7 @@ Download and install the POS-Housing script:
 ```
 [POS]/
 ├── POS-Core/
+├── POS-DoorLocks/
 └── POS-Housing/        ← Add this folder
 ```
 
@@ -111,16 +114,17 @@ Import the required database structure:
 Configure your server.cfg with the proper load order:
 
 1. Open your `server.cfg` file
-2. **Add** `ensure POS-Housing` after POS-Core:
+2. **Add** `ensure POS-Housing` after both POS-Core and POS-DoorLocks:
 
 ```cfg
 # POS Scripts
 ensure POS-Core
+ensure POS-DoorLocks
 ensure POS-Housing       ← Add this line here
 ```
 
 {% hint style="warning" %}
-**Load Order is Critical:** Make sure POS-Housing loads after POS-Core but can load before or after other POS scripts.
+**Load Order is Critical:** Make sure POS-Housing loads after both POS-Core and POS-DoorLocks. The dependency order must be: POS-Core → POS-DoorLocks → POS-Housing.
 {% endhint %}
 
 </details>
@@ -262,22 +266,26 @@ TR = {
 2. **Join with a test character** and verify:
    * No console errors related to POS-Housing
    * POS-Core integration working properly
+   * POS-DoorLocks integration working properly
    * Database connections established
    * House creation commands work
    * Furniture system responds correctly
    * Locksmith system functions properly
    * Housing UI displays correctly
+   * Door management works with houses
 
 #### Common Success Indicators
 
 * ✅ No console errors related to POS-Housing
 * ✅ POS-Core integration messages appear in console
+* ✅ POS-DoorLocks integration working properly
 * ✅ Database tables are accessible
 * ✅ Houses can be created and managed
 * ✅ Furniture system works correctly
 * ✅ Locksmith system functions properly
 * ✅ House buying and selling works
 * ✅ Access control systems function
+* ✅ Door locking/unlocking works with houses
 * ✅ Discord webhooks send notifications (if configured)
 * ✅ Server starts without POS-Housing related errors
 
@@ -295,8 +303,9 @@ TR = {
 
 **Console Errors About Load Order**
 
-* Verify POS-Housing is loaded after POS-Core
-* Check that POS-Core is running without errors
+* Verify POS-Housing is loaded after both POS-Core and POS-DoorLocks
+* Check that both POS-Core and POS-DoorLocks are running without errors
+* Ensure the load order is: POS-Core → POS-DoorLocks → POS-Housing
 
 **Database Connection Issues**
 
@@ -310,11 +319,24 @@ TR = {
 * Check that POS-Core loads before POS-Housing
 * Verify POS-Core configuration is correct
 
+**POS-DoorLocks Integration Issues**
+
+* Ensure POS-DoorLocks is properly installed and running
+* Check that POS-DoorLocks loads before POS-Housing
+* Verify POS-DoorLocks configuration is correct
+* Test door functionality independently
+
 **House Creation/Management Issues**
 
 * Check admin permissions for house management commands
 * Verify house coordinates are correctly set
 * Test house interaction distance settings
+
+**Door Management Issues**
+
+* Verify POS-DoorLocks is functioning properly
+* Check that house doors are properly registered
+* Test door locking/unlocking functionality
 
 **Furniture System Problems**
 
@@ -347,8 +369,9 @@ If you encounter issues not covered here:
 1. **Check Console**: Look for specific error messages
 2. **Verify Steps**: Ensure each installation step was completed
 3. **Check POS-Core**: Ensure POS-Core is working properly
-4. **Test Database**: Verify database operations are working
-5. **Contact Support**: Reach out with console logs and specific error descriptions
+4. **Check POS-DoorLocks**: Ensure POS-DoorLocks is working properly
+5. **Test Database**: Verify database operations are working
+6. **Contact Support**: Reach out with console logs and specific error descriptions
 
 </details>
 
@@ -367,7 +390,7 @@ Your POS-Housing property management system is now installed and ready for use.
 
 #### Important Reminders
 
-* POS-Housing depends on POS-Core - ensure it's always running
+* POS-Housing depends on both POS-Core and POS-DoorLocks - ensure both are always running
 * Keep your database backup safe for recovery purposes
 * Monitor server performance after installation
 * Regular backups are essential for server stability
