@@ -132,6 +132,8 @@
   * [Installation](scripts/pos-river/installation.md)
   * [Config Examples](scripts/pos-river/config-examples/README.md)
     * [config.lua](scripts/pos-river/config-examples/config.lua.md)
+  * [Exports](scripts/pos-river/exports/README.md)
+    * [Client](scripts/pos-river/exports/client.md)
 * [POS-Zombie](scripts/pos-zombie/README.md)
   * [Installation](scripts/pos-zombie/installation.md)
   * [Config Examples](scripts/pos-zombie/config-examples/README.md)
