@@ -35,8 +35,6 @@ local result = exports['POS-ProgressBar']:StartProgress(data)
 
 ### Return Value
 
-The function returns:
-
 | Type | Description |
 |------|-------------|
 | `boolean` | `true` if completed successfully, `false` if cancelled |
