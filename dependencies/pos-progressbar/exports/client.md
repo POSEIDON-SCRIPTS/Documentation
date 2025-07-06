@@ -6,22 +6,40 @@ This document covers the client-side exports available for POS-ProgressBar, allo
 
 ***
 
-## StartProgress Export
+## Available Exports
 
-The main export function for creating progress bars with advanced features including animations, props, and player controls.
+<details>
+
+<summary><strong>🎯 StartProgress Export</strong></summary>
+
+The main export function for creating progress bars with advanced features including animations, props, and player controls. This export can be used both **synchronously** and **asynchronously**.
 
 ### Usage
 
+#### Asynchronous Usage (with callback)
 ```lua
 exports['POS-ProgressBar']:StartProgress(data, callback)
 ```
 
+#### Synchronous Usage (without callback)
+```lua
+local result = exports['POS-ProgressBar']:StartProgress(data)
+```
+
 ### Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `data` | `table` | Configuration table containing progress bar settings |
-| `callback` | `function` | Callback function executed when progress completes or is cancelled |
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `data` | `table` | Yes | Configuration table containing progress bar settings |
+| `callback` | `function` | No | Callback function executed when progress completes or is cancelled |
+
+### Return Value (Synchronous Mode)
+
+When used synchronously (without callback), the function returns:
+
+| Type | Description |
+|------|-------------|
+| `boolean` | `true` if completed successfully, `false` if cancelled |
 
 ### Data Configuration
 
@@ -62,9 +80,68 @@ The `data` table supports the following options:
 
 ### Examples
 
-#### Basic Progress Bar
+#### Synchronous Usage Examples
 
 ```lua
+-- Basic synchronous progress bar
+local success = exports['POS-ProgressBar']:StartProgress({
+    time = 5000,
+    title = "Drinking Water...",
+    canStop = true,
+    freeze = true
+})
+
+if success then
+    print("Successfully drank water!")
+    TriggerServerEvent('pos-metabolism:updateThirst', 25)
+else
+    print("Drinking was cancelled!")
+end
+```
+
+```lua
+-- Synchronous crafting example
+local function craftItem(itemName)
+    local success = exports['POS-ProgressBar']:StartProgress({
+        time = 8000,
+        title = "Crafting " .. itemName .. "...",
+        canStop = true,
+        freeze = true,
+        animation = {
+            type = "anim",
+            animDict = "amb_work@world_human_bartender@male@base",
+            anim = "base",
+            flags = 49
+        },
+        prop = {
+            model = "p_hammer01x",
+            bone = "SKEL_R_HAND",
+            coords = {x = 0.0, y = 0.0, z = 0.0},
+            rotation = {x = 0.0, y = 0.0, z = 0.0}
+        }
+    })
+    
+    if success then
+        TriggerServerEvent('pos-crafting:giveItem', itemName)
+        TriggerEvent('pos-notification:send', {
+            type = 'success',
+            message = 'Item crafted successfully!'
+        })
+        return true
+    else
+        TriggerEvent('pos-notification:send', {
+            type = 'error',
+            message = 'Crafting was cancelled!'
+        })
+        return false
+    end
+end
+```
+
+#### Asynchronous Usage Examples
+
+```lua
+-- Basic asynchronous progress bar
 exports['POS-ProgressBar']:StartProgress({
     time = 5000,
     title = "Drinking Water...",
@@ -73,15 +150,15 @@ exports['POS-ProgressBar']:StartProgress({
 }, function(cancelled)
     if not cancelled then
         print("Successfully drank water!")
+        TriggerServerEvent('pos-metabolism:updateThirst', 25)
     else
         print("Drinking was cancelled!")
     end
 end)
 ```
 
-#### Progress Bar with Animation
-
 ```lua
+-- Progress Bar with Animation
 exports['POS-ProgressBar']:StartProgress({
     time = 8000,
     title = "Crafting Item...",
@@ -95,15 +172,13 @@ exports['POS-ProgressBar']:StartProgress({
     }
 }, function(cancelled)
     if not cancelled then
-        -- Give crafted item
         TriggerServerEvent('pos-crafting:giveItem', 'crafted_item')
     end
 end)
 ```
 
-#### Progress Bar with Scenario
-
 ```lua
+-- Progress Bar with Scenario
 exports['POS-ProgressBar']:StartProgress({
     time = 10000,
     title = "Washing Clothes...",
@@ -121,9 +196,8 @@ exports['POS-ProgressBar']:StartProgress({
 end)
 ```
 
-#### Progress Bar with Prop
-
 ```lua
+-- Progress Bar with Prop
 exports['POS-ProgressBar']:StartProgress({
     time = 6000,
     title = "Drinking from Bottle...",
@@ -143,15 +217,13 @@ exports['POS-ProgressBar']:StartProgress({
     }
 }, function(cancelled)
     if not cancelled then
-        -- Apply drinking effects
         TriggerServerEvent('pos-metabolism:updateThirst', 25)
     end
 end)
 ```
 
-#### Complex Progress Bar with All Features
-
 ```lua
+-- Complex Progress Bar with All Features
 exports['POS-ProgressBar']:StartProgress({
     time = 15000,
     title = "Preparing Medicine...",
@@ -185,6 +257,111 @@ exports['POS-ProgressBar']:StartProgress({
         })
     end
 end)
+```
+
+### When to Use Each Method
+
+#### Use Synchronous Mode When:
+- You need to wait for the result before continuing
+- You want cleaner, more readable code flow
+- You're using the result immediately after completion
+- You need to return a value based on the progress result
+
+#### Use Asynchronous Mode When:
+- You want non-blocking execution
+- You're handling complex completion logic
+- You're triggering multiple events after completion
+- You prefer callback-style programming
+
+### Advanced Examples
+
+#### Chained Synchronous Progress Bars
+```lua
+local function performComplexTask()
+    -- Step 1: Gather materials
+    local step1 = exports['POS-ProgressBar']:StartProgress({
+        time = 5000,
+        title = "Gathering Materials...",
+        canStop = true,
+        freeze = true
+    })
+    
+    if not step1 then
+        return false, "Material gathering cancelled"
+    end
+    
+    -- Step 2: Process materials
+    local step2 = exports['POS-ProgressBar']:StartProgress({
+        time = 8000,
+        title = "Processing Materials...",
+        canStop = true,
+        freeze = true,
+        animation = {
+            type = "scenario",
+            scenario = "WORLD_HUMAN_HAMMERING",
+            time = 8000
+        }
+    })
+    
+    if not step2 then
+        return false, "Processing cancelled"
+    end
+    
+    -- Step 3: Final assembly
+    local step3 = exports['POS-ProgressBar']:StartProgress({
+        time = 6000,
+        title = "Final Assembly...",
+        canStop = true,
+        freeze = true
+    })
+    
+    if not step3 then
+        return false, "Assembly cancelled"
+    end
+    
+    return true, "Task completed successfully"
+end
+
+-- Usage
+local success, message = performComplexTask()
+if success then
+    print("All steps completed: " .. message)
+    TriggerServerEvent('pos-crafting:completeComplexTask')
+else
+    print("Task failed: " .. message)
+end
+```
+
+#### Integration with Other POS Scripts
+```lua
+-- Example integration with POS-Inventory
+local function craftItem(itemName, requiredItems)
+    -- Check if player has required items
+    local hasItems = exports['POS-Inventory']:HasItems(requiredItems)
+    
+    if hasItems then
+        exports['POS-ProgressBar']:StartProgress({
+            time = 8000,
+            title = "Crafting " .. itemName .. "...",
+            canStop = true,
+            freeze = true,
+            animation = {
+                type = "scenario",
+                scenario = "WORLD_HUMAN_HAMMERING",
+                time = 8000
+            }
+        }, function(cancelled)
+            if not cancelled then
+                TriggerServerEvent('pos-crafting:completeItem', itemName, requiredItems)
+            end
+        end)
+    else
+        TriggerEvent('pos-notification:send', {
+            type = 'error',
+            message = 'You don\'t have the required items!'
+        })
+    end
+end
 ```
 
 ### Callback Function
@@ -222,75 +399,46 @@ Common animation flags for different behaviors:
 | `32` | Enable player control |
 | `49` | Repeat + Upper body only |
 
-### Best Practices
-
-1. **Always use freeze** for actions that should prevent player movement
-2. **Set canStop to true** for longer actions to allow player cancellation
-3. **Choose appropriate animations** that match the action being performed
-4. **Use realistic timing** - match progress bar duration to animation length
-5. **Handle cancellation** properly in your callback function
-6. **Test prop positioning** thoroughly as different player models may vary
-7. **Preload animations** if using the same ones frequently
-
-### Integration with Other POS Scripts
-
-```lua
--- Example integration with POS-Inventory
-local function craftItem(itemName, requiredItems)
-    -- Check if player has required items
-    local hasItems = exports['POS-Inventory']:HasItems(requiredItems)
-    
-    if hasItems then
-        exports['POS-ProgressBar']:StartProgress({
-            time = 8000,
-            title = "Crafting " .. itemName .. "...",
-            canStop = true,
-            freeze = true,
-            animation = {
-                type = "scenario",
-                scenario = "WORLD_HUMAN_HAMMERING",
-                time = 8000
-            }
-        }, function(cancelled)
-            if not cancelled then
-                -- Remove required items and give crafted item
-                TriggerServerEvent('pos-crafting:completeItem', itemName, requiredItems)
-            end
-        end)
-    else
-        TriggerEvent('pos-notification:send', {
-            type = 'error',
-            message = 'You don\'t have the required items!'
-        })
-    end
-end
-```
-
 ### Error Handling
 
 The progress bar system includes built-in error handling, but you should still validate your data:
 
 ```lua
-local function safeStartProgress(data, callback)
-    -- Validate required fields
+-- Synchronous error handling
+local function safeProgressSync(data)
     if not data.time or not data.title then
         print("ERROR: Progress bar requires 'time' and 'title' fields")
         return false
     end
     
-    -- Validate animation data
-    if data.animation and data.animation.type == "anim" then
-        if not data.animation.animDict or not data.animation.anim then
-            print("ERROR: Animation type 'anim' requires 'animDict' and 'anim' fields")
-            return false
-        end
+    local success = exports['POS-ProgressBar']:StartProgress(data)
+    return success
+end
+
+-- Asynchronous error handling
+local function safeProgressAsync(data, callback)
+    if not data.time or not data.title then
+        print("ERROR: Progress bar requires 'time' and 'title' fields")
+        if callback then callback(true) end -- Call as cancelled
+        return
     end
     
-    -- Start progress bar
     exports['POS-ProgressBar']:StartProgress(data, callback)
-    return true
 end
 ```
+
+### Best Practices
+
+1. **Choose the right method** - Use synchronous for sequential operations, asynchronous for parallel operations
+2. **Always validate data** before calling the export
+3. **Handle cancellation properly** in both modes
+4. **Use appropriate timing** - match progress bar duration to the actual task
+5. **Provide user feedback** for both successful and cancelled operations
+6. **Test thoroughly** - both completion and cancellation scenarios
+7. **Always use freeze** for actions that should prevent player movement
+8. **Set canStop to true** for longer actions to allow player cancellation
+9. **Choose appropriate animations** that match the action being performed
+10. **Test prop positioning** thoroughly as different player models may vary
 
 ### Troubleshooting
 
@@ -315,5 +463,12 @@ end
 - Check for script errors in console
 - Verify callback function is properly defined
 
-This export provides a comprehensive solution for creating interactive progress bars with full animation and prop support, perfect for crafting, medical, and other interactive systems in your RedM server.
+</details>
 
+***
+
+## Notes
+
+The callback parameter is **optional** - when omitted, the function operates synchronously and returns the result directly. This flexibility allows you to choose the programming style that best fits your specific use case.
+
+This export provides a comprehensive solution for creating interactive progress bars with full animation and prop support, perfect for crafting, medical, and other interactive systems in your RedM server.
