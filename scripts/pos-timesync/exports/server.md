@@ -231,10 +231,7 @@ AddEventHandler('pos-activities:startActivity', function(activityType, location)
     local canStart, multiplier, errorMessage = canPerformActivity(activityType, location)
     
     if not canStart then
-        TriggerClientEvent('pos-notification:send', _source, {
-            type = 'error',
-            message = errorMessage
-        })
+        TriggerClientEvent('POS-Core:notify', _source, 'POS-Activities', errorMessage, 'error', 5000)
         return
     end
     
@@ -279,11 +276,7 @@ Citizen.CreateThread(function()
             
             local message = weatherMessages[currentWeather] or "Weather conditions are changing."
             
-            TriggerClientEvent('pos-notification:send', -1, {
-                type = 'info',
-                message = message,
-                duration = 5000
-            })
+            TriggerClientEvent('POS-Core:notify', -1, 'POS-TimeSync', message, 'info', 5000)
         end
         
         lastWeather = currentWeather

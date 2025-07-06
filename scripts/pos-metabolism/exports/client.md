@@ -62,19 +62,13 @@ end
 -- Check if player needs to eat
 local food = exports['POS-Metabolism']:GetStatus('food')
 if food and food < 25 then
-    TriggerEvent('pos-notification:send', {
-        type = 'warning',
-        message = 'You are getting hungry!'
-    })
+    TriggerEvent('POS-Core:notify', 'POS-Metabolism', 'You are getting hungry!', 'warning', 5000)
 end
 
 -- Check alcohol level before driving
 local alcohol = exports['POS-Metabolism']:GetStatus('alcohol')
 if alcohol and alcohol > 50 then
-    TriggerEvent('pos-notification:send', {
-        type = 'error',
-        message = 'You are too drunk to drive!'
-    })
+    TriggerEvent('POS-Core:notify', 'POS-Metabolism', 'You are too drunk to drive!', 'error', 5000)
     return
 end
 ```
@@ -120,17 +114,11 @@ end
 local data = exports['POS-Metabolism']:GetData()
 if data then
     if data.food < 20 or data.water < 20 then
-        TriggerEvent('pos-notification:send', {
-            type = 'warning',
-            message = 'You need food or water!'
-        })
+        TriggerEvent('POS-Core:notify', 'POS-Metabolism', 'You need food or water!', 'warning', 5000)
     end
     
     if data.piss > 80 or data.poop > 80 then
-        TriggerEvent('pos-notification:send', {
-            type = 'info',
-            message = 'You should find a bathroom!'
-        })
+        TriggerEvent('POS-Core:notify', 'POS-Metabolism', 'You should find a bathroom!', 'info', 5000)
     end
 end
 ```
@@ -182,10 +170,7 @@ AddEventHandler('pos-items:useFood', function(itemData)
     
     exports['POS-Metabolism']:UpdateStatus('food', foodValue)
     
-    TriggerEvent('pos-notification:send', {
-        type = 'success',
-        message = 'You ate ' .. itemData.label .. ' (+' .. foodValue .. ' food)'
-    })
+    TriggerEvent('POS-Core:notify', 'POS-Items', 'You ate ' .. itemData.label .. ' (+' .. foodValue .. ' food)', 'success', 5000)
 end)
 ```
 
@@ -250,10 +235,7 @@ AddEventHandler('pos-items:useAlcohol', function(itemData)
         stress = -5
     })
     
-    TriggerEvent('pos-notification:send', {
-        type = 'info',
-        message = 'You drank ' .. itemData.label
-    })
+    TriggerEvent('POS-Core:notify', 'POS-Items', 'You drank ' .. itemData.label, 'info', 5000)
 end)
 ```
 
@@ -302,10 +284,7 @@ RegisterNetEvent('pos-medical:fullHeal')
 AddEventHandler('pos-medical:fullHeal', function()
     exports['POS-Metabolism']:SetStatus('health', 600)
     
-    TriggerEvent('pos-notification:send', {
-        type = 'success',
-        message = 'You have been fully healed!'
-    })
+    TriggerEvent('POS-Core:notify', 'POS-Medical', 'You have been fully healed!', 'success', 5000)
 end)
 ```
 
@@ -425,10 +404,7 @@ AddEventHandler('pos-bathing:useBath', function()
     }, function(status)
         if status then
             exports['POS-Metabolism']:ShowerEvent()
-            TriggerEvent('pos-notification:send', {
-                type = 'success',
-                message = 'You feel clean and refreshed!'
-            })
+            TriggerEvent('POS-Core:notify', 'POS-Bathing', 'You feel clean and refreshed!', 'success', 5000)
         end
     end)
 end)
@@ -440,15 +416,9 @@ AddEventHandler('pos-hotel:useShower', function()
     
     if shower < 50 then
         exports['POS-Metabolism']:ShowerEvent()
-        TriggerEvent('pos-notification:send', {
-            type = 'success',
-            message = 'You took a refreshing shower!'
-        })
+        TriggerEvent('POS-Core:notify', 'POS-Hotel', 'You took a refreshing shower!', 'success', 5000)
     else
-        TriggerEvent('pos-notification:send', {
-            type = 'info',
-            message = 'You don\'t need a shower right now.'
-        })
+        TriggerEvent('POS-Core:notify', 'POS-Hotel', 'You don\'t need a shower right now.', 'info', 5000)
     end
 end)
 ```
@@ -470,20 +440,11 @@ Citizen.CreateThread(function()
         local health = exports['POS-Metabolism']:GetStatus('health')
         if health then
             if health < 100 then
-                TriggerEvent('pos-notification:send', {
-                    type = 'error',
-                    message = 'You are critically injured!'
-                })
+                TriggerEvent('POS-Core:notify', 'POS-Metabolism', 'You are critically injured!', 'error', 5000)
             elseif health < 200 then
-                TriggerEvent('pos-notification:send', {
-                    type = 'warning',
-                    message = 'You are badly injured.'
-                })
+                TriggerEvent('POS-Core:notify', 'POS-Metabolism', 'You are badly injured.', 'warning', 5000)
             elseif health < 400 then
-                TriggerEvent('pos-notification:send', {
-                    type = 'info',
-                    message = 'You have some injuries.'
-                })
+                TriggerEvent('POS-Core:notify', 'POS-Metabolism', 'You have some injuries.', 'info', 5000)
             end
         end
     end
@@ -544,10 +505,7 @@ local function checkSurvivalNeeds()
     
     -- Send warnings
     for _, warning in ipairs(warnings) do
-        TriggerEvent('pos-notification:send', {
-            type = 'warning',
-            message = warning
-        })
+        TriggerEvent('POS-Core:notify', 'POS-Metabolism', warning, 'warning', 5000)
     end
 end
 
@@ -584,10 +542,7 @@ AddEventHandler('pos-restaurant:orderMeal', function(mealData)
                 stress = -mealData.comfort
             })
             
-            TriggerEvent('pos-notification:send', {
-                type = 'success',
-                message = 'You enjoyed the ' .. mealData.name .. '!'
-            })
+            TriggerEvent('POS-Core:notify', 'POS-Restaurant', 'You enjoyed the ' .. mealData.name .. '!', 'success', 5000)
         end
     end)
 end)
@@ -616,17 +571,11 @@ AddEventHandler('pos-medical:applyBandage', function()
         }, function(status)
             if status then
                 exports['POS-Metabolism']:UpdateStatus('health', 50)
-                TriggerEvent('pos-notification:send', {
-                    type = 'success',
-                    message = 'Bandage applied. Health restored.'
-                })
+                TriggerEvent('POS-Core:notify', 'POS-Medical', 'Bandage applied. Health restored.', 'success', 5000)
             end
         end)
     else
-        TriggerEvent('pos-notification:send', {
-            type = 'info',
-            message = 'You don\'t need medical attention.'
-        })
+        TriggerEvent('POS-Core:notify', 'POS-Medical', 'You don\'t need medical attention.', 'info', 5000)
     end
 end)
 ```
@@ -709,7 +658,6 @@ This export system integrates seamlessly with:
 - **POS-ProgressBar** for timed actions
 - **POS-Inventory** for item consumption
 - **POS-Medical** for health management
-- **POS-Notification** for status alerts
 - **POS-Core** for character data management
 
 The metabolism system provides a comprehensive foundation for survival mechanics, health management, and player status tracking in your RedM server.

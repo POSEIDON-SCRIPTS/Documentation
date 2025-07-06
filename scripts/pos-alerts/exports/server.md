@@ -166,15 +166,9 @@ AddEventHandler('pos-medical:emergencyCall', function(injuryType, location)
     })
     
     if success then
-        TriggerClientEvent('pos-notification:send', _source, {
-            type = 'success',
-            message = 'Emergency services have been notified!'
-        })
+        TriggerClientEvent('POS-Core:notify', _source, 'POS-Medical', 'Emergency services have been notified!', 'success', 5000)
     else
-        TriggerClientEvent('pos-notification:send', _source, {
-            type = 'error',
-            message = 'Failed to contact emergency services!'
-        })
+        TriggerClientEvent('POS-Core:notify', _source, 'POS-Medical', 'Failed to contact emergency services!', 'error', 5000)
     end
 end)
 ```

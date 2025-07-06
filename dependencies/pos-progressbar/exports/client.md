@@ -121,16 +121,10 @@ local function craftItem(itemName)
     
     if success then
         TriggerServerEvent('pos-crafting:giveItem', itemName)
-        TriggerEvent('pos-notification:send', {
-            type = 'success',
-            message = 'Item crafted successfully!'
-        })
+        TriggerEvent('POS-Core:notify', 'POS-Crafting', 'Item crafted successfully!', 'success', 5000)
         return true
     else
-        TriggerEvent('pos-notification:send', {
-            type = 'error',
-            message = 'Crafting was cancelled!'
-        })
+        TriggerEvent('POS-Core:notify', 'POS-Crafting', 'Crafting was cancelled!', 'error', 5000)
         return false
     end
 end
@@ -244,15 +238,9 @@ exports['POS-ProgressBar']:StartProgress({
 }, function(status)
     if status then
         TriggerServerEvent('pos-medical:createMedicine', 'advanced_medicine')
-        TriggerEvent('pos-notification:send', {
-            type = 'success',
-            message = 'Medicine prepared successfully!'
-        })
+        TriggerEvent('POS-Core:notify', 'POS-Medical', 'Medicine prepared successfully!', 'success', 5000)
     else
-        TriggerEvent('pos-notification:send', {
-            type = 'error',
-            message = 'Medicine preparation was cancelled!'
-        })
+        TriggerEvent('POS-Core:notify', 'POS-Medical', 'Medicine preparation was cancelled!', 'error', 5000)
     end
 end)
 ```
@@ -354,10 +342,7 @@ local function craftItem(itemName, requiredItems)
             end
         end)
     else
-        TriggerEvent('pos-notification:send', {
-            type = 'error',
-            message = 'You don\'t have the required items!'
-        })
+        TriggerEvent('POS-Core:notify', 'POS-Inventory', 'You don\'t have the required items!', 'error', 5000)
     end
 end
 ```

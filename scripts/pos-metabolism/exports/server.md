@@ -60,10 +60,7 @@ AddEventHandler('pos-character:characterCreated', function()
     -- Reset metabolism data for new character
     exports['POS-Metabolism']:ResetData(_source)
     
-    TriggerClientEvent('pos-notification:send', _source, {
-        type = 'success',
-        message = 'Welcome! Your character has been created.'
-    })
+    TriggerClientEvent('POS-Core:notify', _source, 'POS-Character', 'Welcome! Your character has been created.', 'success', 5000)
 end)
 
 -- Integration with admin commands
@@ -72,10 +69,7 @@ RegisterCommand('resetmetabolism', function(source, args)
     
     -- Check if player has admin permissions
     if not exports['POS-Core']:IsPlayerAdmin(_source) then
-        TriggerClientEvent('pos-notification:send', _source, {
-            type = 'error',
-            message = 'You don\'t have permission to use this command.'
-        })
+        TriggerClientEvent('POS-Core:notify', _source, 'POS-Admin', 'You don\'t have permission to use this command.', 'error', 5000)
         return
     end
     
@@ -84,20 +78,11 @@ RegisterCommand('resetmetabolism', function(source, args)
     if GetPlayerName(targetId) then
         exports['POS-Metabolism']:ResetData(targetId)
         
-        TriggerClientEvent('pos-notification:send', _source, {
-            type = 'success',
-            message = 'Metabolism data reset for player ' .. GetPlayerName(targetId)
-        })
+        TriggerClientEvent('POS-Core:notify', _source, 'POS-Admin', 'Metabolism data reset for player ' .. GetPlayerName(targetId), 'success', 5000)
         
-        TriggerClientEvent('pos-notification:send', targetId, {
-            type = 'info',
-            message = 'Your metabolism data has been reset by an admin.'
-        })
+        TriggerClientEvent('POS-Core:notify', targetId, 'POS-Admin', 'Your metabolism data has been reset by an admin.', 'info', 5000)
     else
-        TriggerClientEvent('pos-notification:send', _source, {
-            type = 'error',
-            message = 'Player not found.'
-        })
+        TriggerClientEvent('POS-Core:notify', _source, 'POS-Admin', 'Player not found.', 'error', 5000)
     end
 end)
 
@@ -109,10 +94,7 @@ AddEventHandler('pos-respawn:playerRespawned', function()
     -- Reset metabolism data on respawn
     exports['POS-Metabolism']:ResetData(_source)
     
-    TriggerClientEvent('pos-notification:send', _source, {
-        type = 'info',
-        message = 'Your metabolism has been restored.'
-    })
+    TriggerClientEvent('POS-Core:notify', _source, 'POS-Respawn', 'Your metabolism has been restored.', 'info', 5000)
 end)
 
 -- Integration with medical system
@@ -123,10 +105,7 @@ AddEventHandler('pos-medical:fullRecovery', function()
     -- Full recovery resets all metabolism
     exports['POS-Metabolism']:ResetData(_source)
     
-    TriggerClientEvent('pos-notification:send', _source, {
-        type = 'success',
-        message = 'You have made a full recovery!'
-    })
+    TriggerClientEvent('POS-Core:notify', _source, 'POS-Medical', 'You have made a full recovery!', 'success', 5000)
 end)
 ```
 
@@ -178,10 +157,7 @@ AddEventHandler('pos-items:useRestorativeItem', function(itemData)
         stress = itemData.stressRestore or 0
     })
     
-    TriggerClientEvent('pos-notification:send', _source, {
-        type = 'success',
-        message = 'You used ' .. itemData.label .. ' and feel restored!'
-    })
+    TriggerClientEvent('POS-Core:notify', _source, 'POS-Items', 'You used ' .. itemData.label .. ' and feel restored!', 'success', 5000)
 end)
 
 -- Integration with hotel system
@@ -199,10 +175,7 @@ AddEventHandler('pos-hotel:useDeluxeRoom', function()
         peedHimself = false
     })
     
-    TriggerClientEvent('pos-notification:send', _source, {
-        type = 'success',
-        message = 'You feel completely refreshed after staying in the deluxe room!'
-    })
+    TriggerClientEvent('POS-Core:notify', _source, 'POS-Hotel', 'You feel completely refreshed after staying in the deluxe room!', 'success', 5000)
 end)
 
 -- Integration with saloon system
@@ -232,10 +205,7 @@ AddEventHandler('pos-saloon:orderSpecialMeal', function(mealType)
     if effects then
         exports['POS-Metabolism']:SetMultipleStatus(_source, effects)
         
-        TriggerClientEvent('pos-notification:send', _source, {
-            type = 'success',
-            message = 'You enjoyed the ' .. mealType:gsub('_', ' ') .. '!'
-        })
+        TriggerClientEvent('POS-Core:notify', _source, 'POS-Saloon', 'You enjoyed the ' .. mealType:gsub('_', ' ') .. '!', 'success', 5000)
     end
 end)
 
@@ -251,10 +221,7 @@ AddEventHandler('pos-events:specialEvent', function(eventType)
             stress = 0
         })
         
-        TriggerClientEvent('pos-notification:send', _source, {
-            type = 'success',
-            message = 'You received a health checkup and feel great!'
-        })
+        TriggerClientEvent('POS-Core:notify', _source, 'POS-Events', 'You received a health checkup and feel great!', 'success', 5000)
     elseif eventType == 'feast_event' then
         -- Food event - restore hunger and thirst
         exports['POS-Metabolism']:SetMultipleStatus(_source, {
@@ -263,10 +230,7 @@ AddEventHandler('pos-events:specialEvent', function(eventType)
             stress = 0
         })
         
-        TriggerClientEvent('pos-notification:send', _source, {
-            type = 'success',
-            message = 'You participated in the feast and feel satisfied!'
-        })
+        TriggerClientEvent('POS-Core:notify', _source, 'POS-Events', 'You participated in the feast and feel satisfied!', 'success', 5000)
     end
 end)
 
@@ -311,10 +275,7 @@ AddEventHandler('pos-jobs:completeShift', function(jobType, hoursWorked)
         
         exports['POS-Metabolism']:SetMultipleStatus(_source, adjustedEffects)
         
-        TriggerClientEvent('pos-notification:send', _source, {
-            type = 'info',
-            message = 'You completed your shift and feel the effects of ' .. hoursWorked .. ' hours of work.'
-        })
+        TriggerClientEvent('POS-Core:notify', _source, 'POS-Jobs', 'You completed your shift and feel the effects of ' .. hoursWorked .. ' hours of work.', 'info', 5000)
     end
 end)
 ```
@@ -333,6 +294,7 @@ RegisterCommand('setplayerhealth', function(source, args)
     local _source = source
     
     if not exports['POS-Core']:IsPlayerAdmin(_source) then
+        TriggerClientEvent('POS-Core:notify', _source, 'POS-Admin', 'You don\'t have permission to use this command.', 'error', 5000)
         return
     end
     
@@ -344,10 +306,9 @@ RegisterCommand('setplayerhealth', function(source, args)
             health = math.max(0, math.min(600, healthValue))
         })
         
-        TriggerClientEvent('pos-notification:send', _source, {
-            type = 'success',
-            message = 'Set ' .. GetPlayerName(targetId) .. '\'s health to ' .. healthValue
-        })
+        TriggerClientEvent('POS-Core:notify', _source, 'POS-Admin', 'Set ' .. GetPlayerName(targetId) .. '\'s health to ' .. healthValue, 'success', 5000)
+    else
+        TriggerClientEvent('POS-Core:notify', _source, 'POS-Admin', 'Player not found.', 'error', 5000)
     end
 end)
 
@@ -355,6 +316,7 @@ RegisterCommand('healall', function(source)
     local _source = source
     
     if not exports['POS-Core']:IsPlayerAdmin(_source) then
+        TriggerClientEvent('POS-Core:notify', _source, 'POS-Admin', 'You don\'t have permission to use this command.', 'error', 5000)
         return
     end
     
@@ -374,10 +336,7 @@ RegisterCommand('healall', function(source)
         end
     end
     
-    TriggerClientEvent('pos-notification:send', _source, {
-        type = 'success',
-        message = 'Healed ' .. healedCount .. ' players.'
-    })
+    TriggerClientEvent('POS-Core:notify', _source, 'POS-Admin', 'Healed ' .. healedCount .. ' players.', 'success', 5000)
 end)
 ```
 
@@ -403,10 +362,7 @@ local function scheduleDailyReset()
                     stress = 0
                 })
                 
-                TriggerClientEvent('pos-notification:send', id, {
-                    type = 'info',
-                    message = 'A new day has begun. You feel refreshed!'
-                })
+                TriggerClientEvent('POS-Core:notify', id, 'POS-Metabolism', 'A new day has begun. You feel refreshed!', 'info', 5000)
             end
         end
         
@@ -450,10 +406,7 @@ local function validateMetabolismData(source, data)
         -- Reset player data as punishment
         exports['POS-Metabolism']:ResetData(source)
         
-        TriggerClientEvent('pos-notification:send', source, {
-            type = 'error',
-            message = 'Invalid metabolism data detected. Data has been reset.'
-        })
+        TriggerClientEvent('POS-Core:notify', source, 'POS-AntiCheat', 'Invalid metabolism data detected. Data has been reset.', 'error', 5000)
     end
     
     return valid
@@ -500,7 +453,6 @@ These exports integrate seamlessly with:
 - **POS-Medical** for health systems
 - **POS-Jobs** for work-related effects
 - **POS-TimeSync** for weather-based changes
-- **POS-Notification** for user feedback
 
 The server-side metabolism system provides secure, validated metabolism management with comprehensive logging and anti-cheat integration. It is designed for performance and reliability, ensuring a smooth gameplay experience.
 
