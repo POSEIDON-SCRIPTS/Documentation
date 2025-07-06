@@ -117,6 +117,8 @@
   * [Installation](scripts/pos-timesync/installation.md)
   * [Config Examples](scripts/pos-timesync/config-examples/README.md)
     * [config.lua](scripts/pos-timesync/config-examples/config.lua.md)
+  * [Exports](scripts/pos-timesync/exports/README.md)
+    * [Server](scripts/pos-timesync/exports/server.md)
 * [POS-Prone](scripts/pos-prone/README.md)
   * [Installation](scripts/pos-prone/installation.md)
   * [Config Examples](scripts/pos-prone/config-examples/README.md)
