@@ -41,19 +41,35 @@ The `data` table supports the following options:
 | Option | Type | Required | Description |
 |--------|------|----------|-------------|
 | `id` | `string` | Yes | Alert type identifier matching Config.JobAlerts |
-| `source` | `number` | Yes/No | Player server ID creating the alert |
-| `coords` | `vector3` | Yes/No | Alert coordinates (defaults to player position) |
-| `name` | `string` | Yes/No | Reporter name (defaults to player's first and last name) |
+
+#### Optional Settings (Player-Based Alert)
+
+When `source` is provided, the alert uses player information:
+
+| Option | Type | Required | Description |
+|--------|------|----------|-------------|
+| `source` | `number` | No | Player server ID creating the alert |
+| `coords` | `vector3` | No | Alert coordinates (defaults to player position if source provided) |
+| `name` | `string` | No | Reporter name (defaults to player's first and last name if source provided) |
+
+#### Required Settings (System-Based Alert)
+
+When `source` is NOT provided, these become required:
+
+| Option | Type | Required | Description |
+|--------|------|----------|-------------|
+| `coords` | `vector3` | Yes | Alert coordinates |
+| `name` | `string` | Yes | Reporter name |
 
 ### Examples
 
-#### Basic Alert Creation
+#### Player-Based Alert (with source)
 
 ```lua
--- Create a basic police alert
+-- Create alert using player information
 local success = exports['POS-Alerts']:CreateAlert({
     id = "police",
-    source = source  -- Player who triggered the alert
+    source = source  -- Player coordinates and name automatically used
 })
 
 if success then
@@ -63,13 +79,14 @@ else
 end
 ```
 
-#### Alert with Custom Coordinates
+#### Player-Based Alert with Custom Coordinates
 
 ```lua
--- Create alert at specific location
+-- Create alert with player name but custom location
 local success = exports['POS-Alerts']:CreateAlert({
     id = "ems",
-    coords = vector3(2635.12, -1224.89, 53.24)
+    source = source,  -- Player name automatically used
+    coords = vector3(2635.12, -1224.89, 53.24)  -- Custom location
 })
 
 if success then
@@ -77,18 +94,33 @@ if success then
 end
 ```
 
-#### Alert with Custom Name
+#### Player-Based Alert with Custom Name
 
 ```lua
--- Create alert with custom reporter name
+-- Create alert with player coordinates but custom name
 local success = exports['POS-Alerts']:CreateAlert({
     id = "fire",
-    coords = vector3(2635.12, -1224.89, 53.24),
-    name = "Anonymous Caller"
+    source = source,  -- Player coordinates automatically used
+    name = "Anonymous Caller"  -- Custom name
 })
 
 if success then
     print("Fire alert created with custom name!")
+end
+```
+
+#### System-Based Alert (without source)
+
+```lua
+-- Create alert without player source (system-generated)
+local success = exports['POS-Alerts']:CreateAlert({
+    id = "police",
+    coords = vector3(2635.12, -1224.89, 53.24),  -- Required when no source
+    name = "Security Camera System"  -- Required when no source
+})
+
+if success then
+    print("System alert created successfully!")
 end
 ```
 
@@ -99,13 +131,13 @@ end
 RegisterNetEvent('pos-crime:bankRobbery')
 AddEventHandler('pos-crime:bankRobbery', function(bankLocation)
     local _source = source
-    local playerCoords = GetEntityCoords(GetPlayerPed(_source))
     
     -- Create police alert for bank robbery
     local success = exports['POS-Alerts']:CreateAlert({
         id = "police",
-        coords = bankLocation,
-        name = "Bank Security System"
+        source = _source,  -- Uses player name
+        coords = bankLocation,  -- Custom location
+        name = "Bank Security System"  -- Override player name
     })
     
     if success then
@@ -124,14 +156,13 @@ end)
 RegisterNetEvent('pos-medical:emergencyCall')
 AddEventHandler('pos-medical:emergencyCall', function(injuryType, location)
     local _source = source
-    local playerName = exports['POS-Core']:GetFirstName(_source) .. ' ' .. exports['POS-Core']:GetLastName(_source)
     
-    -- Create EMS alert
+    -- Create EMS alert using player information
     local success = exports['POS-Alerts']:CreateAlert({
         id = "ems",
-        source = _source,
-        coords = location or GetEntityCoords(GetPlayerPed(_source)),
-        name = playerName .. " (" .. injuryType .. ")"
+        source = _source,  -- Uses player name and coordinates (if no location provided)
+        coords = location,  -- Optional: override player location
+        name = injuryType .. " Emergency"  -- Optional: override player name
     })
     
     if success then
@@ -155,14 +186,12 @@ end)
 RegisterNetEvent('pos-vehicles:vehicleStolen')
 AddEventHandler('pos-vehicles:vehicleStolen', function(vehicleData)
     local _source = source
-    local theftLocation = GetEntityCoords(GetPlayerPed(_source))
     
     -- Create police alert for vehicle theft
     local success = exports['POS-Alerts']:CreateAlert({
         id = "police",
-        source = _source,
-        coords = theftLocation,
-        name = "Vehicle Theft - " .. vehicleData.model
+        source = _source,  -- Uses player coordinates and name
+        name = "Vehicle Theft - " .. vehicleData.model  -- Override with vehicle info
     })
     
     if success then
@@ -170,92 +199,25 @@ AddEventHandler('pos-vehicles:vehicleStolen', function(vehicleData)
         TriggerEvent('pos-police:setWantedLevel', _source, 2)
         
         -- Notify nearby players
-        TriggerClientEvent('pos-alerts:vehicleTheftAlert', -1, theftLocation, vehicleData)
+        TriggerClientEvent('pos-alerts:vehicleTheftAlert', -1, GetEntityCoords(GetPlayerPed(_source)), vehicleData)
     end
 end)
 ```
 
-#### Integration with Business System
-
-```lua
--- Example: Store robbery alert
-RegisterNetEvent('pos-business:storeRobbery')
-AddEventHandler('pos-business:storeRobbery', function(storeId, storeLocation)
-    local _source = source
-    local storeName = Config.Stores[storeId].name
-    
-    -- Create police alert
-    local success = exports['POS-Alerts']:CreateAlert({
-        id = "police",
-        source = _source,
-        coords = storeLocation,
-        name = storeName .. " - Store Robbery"
-    })
-    
-    if success then
-        -- Trigger silent alarm
-        TriggerClientEvent('pos-business:triggerAlarm', -1, storeId, storeLocation)
-        
-        -- Increase police response
-        TriggerEvent('pos-police:increaseResponse', storeLocation)
-    end
-end)
-```
-
-#### Integration with Fire System
-
-```lua
--- Example: Fire emergency alert
-RegisterNetEvent('pos-fire:fireEmergency')
-AddEventHandler('pos-fire:fireEmergency', function(fireLocation, fireIntensity)
-    local _source = source
-    
-    -- Create fire department alert
-    local success = exports['POS-Alerts']:CreateAlert({
-        id = "fire",
-        source = _source,
-        coords = fireLocation,
-        name = "Fire Emergency - Intensity: " .. fireIntensity
-    })
-    
-    if success then
-        -- Spawn fire effects
-        TriggerClientEvent('pos-fire:spawnFire', -1, fireLocation, fireIntensity)
-        
-        -- Notify nearby players to evacuate
-        TriggerClientEvent('pos-fire:evacuationAlert', -1, fireLocation)
-    end
-end)
-```
-
-#### Automated Alert System
+#### Automated Alert System (System-Based)
 
 ```lua
 -- Example: Automated security system
 local function checkSecurityBreach(location, securityType)
-    local nearbyPlayers = {}
+    -- Create security alert without player source
+    local success = exports['POS-Alerts']:CreateAlert({
+        id = "police",
+        coords = location,  -- Required when no source
+        name = "Security System - " .. securityType  -- Required when no source
+    })
     
-    for _, playerId in ipairs(GetPlayers()) do
-        local playerCoords = GetEntityCoords(GetPlayerPed(playerId))
-        local distance = #(playerCoords - location)
-        
-        if distance < 50.0 then
-            table.insert(nearbyPlayers, playerId)
-        end
-    end
-    
-    if #nearbyPlayers > 0 then
-        -- Create security alert
-        local success = exports['POS-Alerts']:CreateAlert({
-            id = "police",
-            source = nearbyPlayers[1],  -- Use first nearby player as source
-            coords = location,
-            name = "Security Breach - " .. securityType
-        })
-        
-        if success then
-            print("Security breach alert created for " .. securityType)
-        end
+    if success then
+        print("Security breach alert created for " .. securityType)
     end
 end
 
@@ -266,98 +228,78 @@ AddEventHandler('pos-security:breachDetected', function(location, securityType)
 end)
 ```
 
-#### Conditional Alert Creation
-
-```lua
--- Example: Conditional alert based on time and conditions
-local function createConditionalAlert(alertType, playerId, conditions)
-    local currentHour = tonumber(os.date("%H"))
-    local canCreateAlert = true
-    
-    -- Check time restrictions
-    if alertType == "noise_complaint" and (currentHour >= 6 and currentHour <= 22) then
-        canCreateAlert = false  -- No noise complaints during day hours
-    end
-    
-    -- Check weather conditions
-    if alertType == "fire" then
-        local weather = exports['POS-TimeSync']:GetWeather()
-        if weather == "RAIN" or weather == "SHOWER" then
-            canCreateAlert = false  -- No fire alerts during rain
-        end
-    end
-    
-    -- Check player conditions
-    if conditions.playerInjured and alertType ~= "ems" then
-        canCreateAlert = false  -- Injured players can only create EMS alerts
-    end
-    
-    if canCreateAlert then
-        local success = exports['POS-Alerts']:CreateAlert({
-            id = alertType,
-            source = playerId,
-            coords = conditions.location,
-            name = conditions.customName
-        })
-        
-        return success
-    else
-        TriggerClientEvent('pos-notification:send', playerId, {
-            type = 'error',
-            message = 'Cannot create alert under current conditions'
-        })
-        return false
-    end
-end
-```
-
-#### Mass Alert System
+#### Mass Alert System (Mixed Sources)
 
 ```lua
 -- Example: Create multiple alerts for major incident
-local function createMassIncidentAlerts(incidentLocation, incidentType)
+local function createMassIncidentAlerts(incidentLocation, incidentType, reportingPlayer)
     local alertsCreated = 0
     
-    -- Create police alert
-    local policeSuccess = exports['POS-Alerts']:CreateAlert({
-        id = "police",
-        source = nil,  -- System generated
-        coords = incidentLocation,
-        name = "Major Incident - " .. incidentType
-    })
+    if reportingPlayer then
+        -- Create police alert with player source
+        local policeSuccess = exports['POS-Alerts']:CreateAlert({
+            id = "police",
+            source = reportingPlayer,  -- Uses player name
+            coords = incidentLocation,  -- Custom location
+            name = "Major Incident - " .. incidentType  -- Override name
+        })
+        
+        if policeSuccess then alertsCreated = alertsCreated + 1 end
+    else
+        -- Create system-generated alerts
+        local policeSuccess = exports['POS-Alerts']:CreateAlert({
+            id = "police",
+            coords = incidentLocation,  -- Required
+            name = "Emergency System - " .. incidentType  -- Required
+        })
+        
+        if policeSuccess then alertsCreated = alertsCreated + 1 end
+    end
     
-    if policeSuccess then alertsCreated = alertsCreated + 1 end
-    
-    -- Create EMS alert
+    -- Create EMS alert (system-generated)
     local emsSuccess = exports['POS-Alerts']:CreateAlert({
         id = "ems",
-        source = nil,
-        coords = incidentLocation,
-        name = "Mass Casualty - " .. incidentType
+        coords = incidentLocation,  -- Required
+        name = "Mass Casualty - " .. incidentType  -- Required
     })
     
     if emsSuccess then alertsCreated = alertsCreated + 1 end
-    
-    -- Create fire alert if needed
-    if incidentType == "explosion" or incidentType == "fire" then
-        local fireSuccess = exports['POS-Alerts']:CreateAlert({
-            id = "fire",
-            source = nil,
-            coords = incidentLocation,
-            name = "Fire Emergency - " .. incidentType
-        })
-        
-        if fireSuccess then alertsCreated = alertsCreated + 1 end
-    end
     
     return alertsCreated
 end
 
 -- Usage
 RegisterNetEvent('pos-incidents:majorIncident')
-AddEventHandler('pos-incidents:majorIncident', function(location, type)
-    local alertsCreated = createMassIncidentAlerts(location, type)
+AddEventHandler('pos-incidents:majorIncident', function(location, type, reportingPlayer)
+    local alertsCreated = createMassIncidentAlerts(location, type, reportingPlayer)
     print("Created " .. alertsCreated .. " alerts for major incident")
+end)
+```
+
+#### Timer-Based Alert System
+
+```lua
+-- Example: Automated patrol check-in system
+Citizen.CreateThread(function()
+    while true do
+        Citizen.Wait(300000)  -- 5 minutes
+        
+        -- Check for overdue patrol check-ins
+        local overduePatrols = GetOverduePatrols()  -- Your function
+        
+        for _, patrol in ipairs(overduePatrols) do
+            -- Create alert for missing patrol
+            local success = exports['POS-Alerts']:CreateAlert({
+                id = "police",
+                coords = patrol.lastKnownLocation,  -- Required (no source)
+                name = "Patrol Check-In Overdue - " .. patrol.unitId  -- Required (no source)
+            })
+            
+            if success then
+                print("Overdue patrol alert created for " .. patrol.unitId)
+            end
+        end
+    end
 end)
 ```
 
@@ -405,9 +347,17 @@ local function safeCreateAlert(alertData)
         return false
     end
     
+    -- Check if system-based alert has required fields
     if not alertData.source then
-        print("ERROR: Alert requires 'source' field")
-        return false
+        if not alertData.coords then
+            print("ERROR: Alert without source requires 'coords' field")
+            return false
+        end
+        
+        if not alertData.name then
+            print("ERROR: Alert without source requires 'name' field")
+            return false
+        end
     end
     
     -- Check if alert type exists
@@ -427,11 +377,16 @@ local function safeCreateAlert(alertData)
     return true
 end
 
--- Usage
-local success = safeCreateAlert({
+-- Usage examples
+local success1 = safeCreateAlert({
     id = "police",
-    source = source,
-    coords = vector3(100, 200, 30)
+    source = source  -- Player-based alert
+})
+
+local success2 = safeCreateAlert({
+    id = "police",
+    coords = vector3(100, 200, 30),  -- System-based alert
+    name = "Security Camera #1"
 })
 ```
 
@@ -439,7 +394,8 @@ local success = safeCreateAlert({
 
 #### POS-Core Integration
 The export automatically integrates with POS-Core for:
-- Player name retrieval
+- Player name retrieval (when source provided)
+- Player coordinate retrieval (when source provided)
 - Job verification
 - Permission checks
 
@@ -452,46 +408,59 @@ Alerts automatically trigger Discord webhooks with:
 
 #### Notification System
 The export sends notifications to:
-- Alert creator (confirmation)
+- Alert creator (confirmation) - only if source provided
 - Eligible responders (alert notification)
 
 ### Best Practices
 
-1. **Always validate data** before calling the export
-2. **Use meaningful alert IDs** that match your configuration
-3. **Provide context** in custom names for better identification
-4. **Handle return values** to ensure alerts were created successfully
-5. **Consider responder availability** when creating alerts
-6. **Use appropriate coordinates** for accurate location reporting
-7. **Test with different scenarios** to ensure proper functionality
+1. **Use player source when possible** - provides automatic name and coordinate retrieval
+2. **Always validate data** before calling the export
+3. **Use meaningful alert IDs** that match your configuration
+4. **Provide context** in custom names for better identification
+5. **Handle return values** to ensure alerts were created successfully
+6. **Consider responder availability** when creating alerts
+7. **Use appropriate coordinates** for accurate location reporting
+8. **Test with different scenarios** to ensure proper functionality
 
 ### Performance Considerations
 
-- The export checks for existing alerts from the same source and removes duplicates
+- The export checks for existing alerts from the same source and removes duplicates (when source provided)
 - Alert creation includes responder eligibility checks
 - Webhook notifications are sent asynchronously
 - Player notifications are optimized for multiple recipients
+- System-based alerts (without source) are processed faster as they skip player data retrieval
 
 ### Common Use Cases
 
-1. **Crime Alerts**: Bank robberies, vehicle theft, store robberies
-2. **Medical Emergencies**: Injuries, accidents, health crises
-3. **Fire Emergencies**: Building fires, vehicle fires, explosions
-4. **Security Breaches**: Unauthorized access, alarm triggers
-5. **Traffic Incidents**: Accidents, road hazards, pursuits
-6. **Environmental Hazards**: Chemical spills, gas leaks, structural damage
+#### Player-Based Alerts
+1. **Crime Reports**: Player-reported crimes with automatic location
+2. **Medical Emergencies**: Player health crises with automatic identification
+3. **Fire Emergencies**: Player-reported fires with location data
+4. **Traffic Incidents**: Player-reported accidents
+
+#### System-Based Alerts
+1. **Security Breaches**: Automated security system alerts
+2. **Environmental Monitoring**: Sensor-based alerts
+3. **Scheduled Events**: Timer-based system alerts
+4. **AI-Generated Alerts**: Automated incident detection
 
 ### Troubleshooting
 
 **Alert not created:**
 - Check if alert ID exists in Config.JobAlerts
-- Verify source player ID is valid
-- Ensure required data fields are provided
+- Verify source player ID is valid (if provided)
+- Ensure coords and name are provided when source is not
+- Check required data fields are provided
 
 **No responders notified:**
 - Check if responders are on duty (if duty requirement enabled)
 - Verify job configuration matches responder jobs
 - Check player permissions for alert access
+
+**Player information not retrieved:**
+- Verify POS-Core is running and accessible
+- Check if player source ID is valid
+- Ensure player is connected to the server
 
 **Webhook not sent:**
 - Verify webhook configuration in config file
@@ -499,7 +468,7 @@ The export sends notifications to:
 - Ensure webhook permissions are correct
 
 **Duplicate alerts:**
-- System automatically removes existing alerts from same source
+- System automatically removes existing alerts from same source (player-based only)
 - Check for multiple rapid alert creation calls
 - Verify alert deletion logic
 
@@ -509,5 +478,5 @@ The export sends notifications to:
 
 ## Integration
 
-This export integrates seamlessly with other POS scripts and provides a comprehensive alert system for emergency services, security systems, and player interactions. The alert system automatically handles responder notifications, webhook logging, and duplicate prevention.
+This export integrates seamlessly with other POS scripts and provides a comprehensive alert system for emergency services, security systems, and player interactions. The alert system automatically handles responder notifications, webhook logging, and duplicate prevention. It supports both player-based alerts (with automatic data retrieval) and system-based alerts (with manual data entry).
 
