@@ -222,7 +222,7 @@ Config.AirDrops = {
 }
 ```
 
-7. **Navigate** to `resources/[POS]/POS-Zombie/shared/configs/zombies.lua`
+7. **Navigate** to `resources/[POS]/POS-Zombie/shared/zombies.lua`
 8. **Configure** zombie models and health:
 
 ```lua

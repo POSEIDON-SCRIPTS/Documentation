@@ -143,7 +143,7 @@ Config.PauseMenu = {
 }
 ```
 
-5. **Navigate** to `resources/[POS]/POS-PauseMenu/shared/configs/config.js`
+5. **Navigate** to `resources/[POS]/POS-PauseMenu/shared/config.js`
 6. **Configure** the language settings and images:
 
 ```javascript

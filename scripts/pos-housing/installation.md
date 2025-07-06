@@ -198,7 +198,7 @@ Config.Locksmith = {
 }
 ```
 
-5. **Navigate** to `resources/[POS]/POS-Housing/shared/configs/furniture.lua`
+5. **Navigate** to `resources/[POS]/POS-Housing/shared/furniture.lua`
 6. **Configure** furniture categories and items:
 
 ```lua
