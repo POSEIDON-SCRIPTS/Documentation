@@ -33,9 +33,9 @@ local result = exports['POS-ProgressBar']:StartProgress(data)
 | `data` | `table` | Yes | Configuration table containing progress bar settings |
 | `callback` | `function` | No | Callback function executed when progress completes or is cancelled |
 
-### Return Value (Synchronous Mode)
+### Return Value
 
-When used synchronously (without callback), the function returns:
+The function returns:
 
 | Type | Description |
 |------|-------------|
@@ -147,8 +147,8 @@ exports['POS-ProgressBar']:StartProgress({
     title = "Drinking Water...",
     canStop = true,
     freeze = true
-}, function(cancelled)
-    if not cancelled then
+}, function(status)
+    if status then
         print("Successfully drank water!")
         TriggerServerEvent('pos-metabolism:updateThirst', 25)
     else
@@ -170,8 +170,8 @@ exports['POS-ProgressBar']:StartProgress({
         anim = "base",
         flags = 49
     }
-}, function(cancelled)
-    if not cancelled then
+}, function(status)
+    if status then
         TriggerServerEvent('pos-crafting:giveItem', 'crafted_item')
     end
 end)
@@ -189,8 +189,8 @@ exports['POS-ProgressBar']:StartProgress({
         scenario = "WORLD_HUMAN_WASH_CLOTHES_BUCKET",
         time = 10000
     }
-}, function(cancelled)
-    if not cancelled then
+}, function(status)
+    if status then
         print("Clothes washed successfully!")
     end
 end)
@@ -215,8 +215,8 @@ exports['POS-ProgressBar']:StartProgress({
         anim = "idle_a",
         flags = 49
     }
-}, function(cancelled)
-    if not cancelled then
+}, function(status)
+    if status then
         TriggerServerEvent('pos-metabolism:updateThirst', 25)
     end
 end)
@@ -243,8 +243,8 @@ exports['POS-ProgressBar']:StartProgress({
         anim = "base",
         flags = 49
     }
-}, function(cancelled)
-    if not cancelled then
+}, function(status)
+    if status then
         TriggerServerEvent('pos-medical:createMedicine', 'advanced_medicine')
         TriggerEvent('pos-notification:send', {
             type = 'success',
@@ -350,8 +350,8 @@ local function craftItem(itemName, requiredItems)
                 scenario = "WORLD_HUMAN_HAMMERING",
                 time = 8000
             }
-        }, function(cancelled)
-            if not cancelled then
+        }, function(status)
+            if status then
                 TriggerServerEvent('pos-crafting:completeItem', itemName, requiredItems)
             end
         end)
