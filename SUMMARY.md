@@ -14,6 +14,8 @@
   * [Installation](dependencies/pos-progressbar/installation.md)
   * [Config Examples](dependencies/pos-progressbar/config-examples/README.md)
     * [config.lua](dependencies/pos-progressbar/config-examples/config.lua.md)
+  * [Exports](dependencies/pos-progressbar/exports/README.md)
+    * [Client](dependencies/pos-progressbar/exports/client.md)
 
 ## Customer Scripts
 
