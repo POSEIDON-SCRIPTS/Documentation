@@ -271,7 +271,11 @@ Config.Plants = {
         temp = {
             min = 15,
             max = 35,
-        }
+        },
+        defaultValues = {
+            water = 10,
+            fertilizer = 0,
+        },
     },
 
     ['cannabis_buds'] = {
@@ -795,7 +799,6 @@ function Notify(source, text, type) --You can replace with your own notification
         TriggerEvent("POS-Core:notify", 'USI', text, type, 5000)
     end
 end
-
 
 
 ```
