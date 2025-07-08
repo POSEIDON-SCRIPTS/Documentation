@@ -347,14 +347,6 @@ local function craftItem(itemName, requiredItems)
 end
 ```
 
-### Callback Function
-
-The callback function receives one parameter:
-
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `cancelled` | `boolean` | `true` if the progress was cancelled, `false` if completed |
-
 ### Common Bone Names
 
 Here are some commonly used bone names for prop attachment:
