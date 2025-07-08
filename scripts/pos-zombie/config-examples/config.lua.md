@@ -10,9 +10,16 @@ Config.SafeZone = {
     disableMelee = true,
 }
 
+Config.Functions = {
+    damage = function ()
+        
+    end -- Function to handle damage (add a infection or something), you can implement your own logic here
+}
+
 Config.ZombieSettings = {
     sound = 'https://www.youtube.com/watch?v=z7NJYzvDIVE',
     distance = 25.0,
+    damage = 20, -- damage dealt
     zombieSounds = {
         {
             name = "ZombieAmbient_1",
