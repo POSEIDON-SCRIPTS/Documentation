@@ -8,15 +8,15 @@ Config = {
     DayDuration = 4 * 3600,  -- Duration of the in-game day (in seconds). For example, 4 hours of in-game daytime.
     NightDuration = 2 * 3600,  -- Duration of the in-game night (in seconds). For example, 2 hours of in-game nighttime.
     
-    DefaultTransition = 5000.0,  -- Default transition time (in seconds) for weather and time changes
+    DefaultTransition = 5,  -- Default transition time (in seconds) for weather and time changes
 
     -- Weather synchronization settings
     UseWeather = true,  -- Whether to use the in-game weather synchronization system (default: true)
-    CityRealWeather = 'Bucharest',  -- City name to fetch real-time weather data (leave as false if you don't want to use real-world weather data)
+    CityRealWeather = false,  -- City name to fetch real-time weather data (leave as false if you don't want to use real-world weather data)
     RealWeatherCache = 180,  -- Time (in seconds) to cache the real-world weather data. Set to 0 or false to disable weather fetching from real-world sources.
 
     -- Default weather pattern settings
-    WeatherPattern = false,  -- Default weather pattern when CityRealWeather is off (e.g., "Apocalypse", "Thunderstorm")
+    WeatherPattern = 'Christmas2',  -- Default weather pattern when CityRealWeather is off (e.g., "Apocalypse", "Thunderstorm")
 
     -- Snow-related settings
     SnowInWeatherSnow = true,  -- If true, snow will cover the ground when the weather is snowy (if weather snow is enabled).
@@ -36,7 +36,16 @@ Config.Commands = {
             { name="transition", help="Specify the transition time in milliseconds." },
         },
         Groups = {'Owner', 'Administrator', 'Fondator', 'admin'} 
-    }
+    },
+    [2] = {
+        Command = 'setweather', -- or false to disable it
+        Description = 'Set the in-game weather to a specified type.',
+        Parameters = {
+            { name="weather", help="Specify the weather type to set (e.g., sunny, cloudy, rainy)." },
+            { name="transition", help="Specify the transition time in milliseconds." },
+        },
+        Groups = {'Owner', 'Administrator', 'Fondator', 'admin'} 
+    },
 }
 
 Config.Pattern = {
@@ -50,7 +59,7 @@ Config.Pattern = {
                 'overcast', 'overcast', 'misty', 'overcast', 'overcast', 'sunny', 
                 'snow', 'snow', 'blizzard', 'overcast', 'groundblizzard'
             },
-            transition = 15 * 1000,  -- 15 seconds transition
+            transition = 15,  -- 15 seconds transition
             snow = true,  -- Snow will be on the ground
         },
 
@@ -71,7 +80,7 @@ Config.Pattern = {
                 }
 
             },
-            transition = 15 * 1000,  -- 15 seconds transition
+            transition = 15,  -- 15 seconds transition
             snow = true,  -- Snow will be on the ground
         },
 
@@ -79,70 +88,70 @@ Config.Pattern = {
         -- Summer Weather Pattern
         Summer = {
             weather = {'sunny', 'sunny', 'sunny', 'sunny', 'sunny', 'sunny', 'clouds', 'clouds', 'thunderstorm'},
-            transition = 15 * 1000,  -- 15 seconds transition
+            transition = 15,  -- 15 seconds transition
             snow = false,  -- No snow
         },
 
         -- Halloween Weather Pattern
         Halloween = {
             weather = {'hurricane', 'thunderstorm', 'hurricane', 'hurricane', 'hurricane'},
-            transition = 15 * 1000,  -- 15 seconds transition
+            transition = 15,  -- 15 seconds transition
             snow = false,  -- No snow
         },
 
         -- Apocalypse Weather Pattern
         Apocalypse = {
             weather = {'hurricane', 'thunderstorm', 'sandstorm', 'groundblizzard', 'blizzard'},
-            transition = 15 * 1000,  -- 15 seconds transition
+            transition = 15,  -- 15 seconds transition
             snow = false,  -- No snow
         },
 
         -- Spring Weather Pattern 
         Spring = {
             weather = {'sunny', 'clouds', 'drizzle', 'fog', 'overcast', 'rain', 'thunderstorm', 'sunny', 'clouds'},
-            transition = 15 * 1000,  -- 15 seconds transition
+            transition = 15,  -- 15 seconds transition
             snow = false,  -- No snow
         },
 
         -- Autumn Weather Pattern 
         Autumn = {
             weather = {'overcast', 'clouds', 'rain', 'drizzle', 'fog', 'snowlight', 'sunny', 'misty', 'overcast', 'groundblizzard'},
-            transition = 15 * 1000,  -- 15 seconds transition
+            transition = 15,  -- 15 seconds transition
             snow = true,  -- Snow on the ground can occur
         },
 
         -- Stormy Night 
         StormyNight = {
             weather = {'thunderstorm', 'thunderstorm', 'rain', 'thunder', 'hail', 'hail', 'rain', 'thunderstorm'},
-            transition = 15 * 1000,  -- 15 seconds transition
+            transition = 15,  -- 15 seconds transition
             snow = false,  -- No snow
         },
 
         -- Tropical Rainstorm 
         TropicalRainstorm = {
             weather = {'rain', 'rain', 'rain', 'drizzle', 'drizzle', 'rain', 'thunderstorm', 'clouds'},
-            transition = 15 * 1000,  -- 15 seconds transition
+            transition = 15,  -- 15 seconds transition
             snow = false,  -- No snow
         },
 
         -- Cold Front 
         ColdFront = {
             weather = {'snow', 'snow', 'snow', 'snow', 'blizzard', 'groundblizzard', 'snowlight', 'snow'},
-            transition = 15 * 1000,  -- 15 seconds transition
+            transition = 15,  -- 15 seconds transition
             snow = true,  -- Snow on the ground
         },
 
         -- Sandstorm 
         Sandstorm = {
             weather = {'sandstorm', 'sandstorm', 'sandstorm', 'HURRICANE', 'HURRICANE', 'HURRICANE', 'sandstorm'},
-            transition = 15 * 1000,  -- 15 seconds transition
+            transition = 15,  -- 15 seconds transition
             snow = false,  -- No snow
         },
 
         -- Calm Weather 
         CalmWeather = {
             weather = {'sunny', 'clouds', 'clear', 'sunny', 'clouds'},
-            transition = 15 * 1000,  -- 15 seconds transition
+            transition = 15,  -- 15 seconds transition
             snow = false,  -- No snow
         },
     }
@@ -204,6 +213,11 @@ weatherTypes = {
 
 -- Available weathers:
 --"SUNNY", "CLOUDS", "MISTY", "FOG", "OVERCASTDARK", "OVERCAST", "THUNDER", "THUNDERSTORM", "DRIZZLE", "RAIN", "SHOWER", "HURRICANE", "SNOWLIGHT", "SNOW", "GROUNDBLIZZARD", "SANDSTORM"
+Config.WeatherTypes = {
+    'SUNNY', 'CLOUDS', 'MISTY', 'FOG', 'OVERCASTDARK', 'OVERCAST', 'THUNDER', 
+    'THUNDERSTORM', 'DRIZZLE', 'RAIN', 'SHOWER', 'HURRICANE', 
+    'SNOWLIGHT', 'SNOW', 'GROUNDBLIZZARD', 'SANDSTORM'
+}
 
 Config.Lang = 'EN' -- YOU NEED TO MODIFY IT TOO IN THE FILE CONFIG.JS FOR THE MENU TRANSLATION, THE FOLLOWING MESSAGES ARE JUST FOR NOTIFICATIONS
 
@@ -214,6 +228,13 @@ Config.Text = {
         ['cannot_use_real_time'] = 'You cannot use this command while having real time enabled!', 
         ['time_set'] = 'You set the time to %s:%s:%s. And it will be set in %s ms',
         ['not_allowed'] = 'You are not allowed to do that!',
+        ['weather_set'] = 'You have set the weather to: %s with a transition of %s s',
+        ['weather_set_region'] = 'You have set the weather to %s in this region with a transition of %s s',
+        ['weather_disabled'] = 'Weather control is currently disabled!',
+        ['cannot_use_real_weather'] = 'You cannot use this command while real weather is enabled!',
+        ['invalid_weather_type'] = 'You must specify a valid weather type!',
+        ['invalid_weather_type_list'] = 'Invalid weather type! Allowed types are: %s',
+    
     },
 }
 
