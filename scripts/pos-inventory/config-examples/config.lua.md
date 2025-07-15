@@ -1,4 +1,4 @@
-# Config.lua
+# config.lua
 
 ```lua
 Config = {}
@@ -24,6 +24,8 @@ Config.UseMaxWeightVORP = true -- If you want to use max weight from config, set
 Config.ItemsInDatabaseVORP = true -- If you want to use items in database, set this to true. If you want to use items in config, set this to false.
 Config.UseLoadoutTableVORP = true -- If you want to use loadout table, set this to true. (This will make sure weapon scripts are working properly)
 
+
+Config.MoneyItem = "bani" -- Item name for money (used in the main inventory)
 
 Config.Commands = {
     [1] = {
@@ -103,6 +105,10 @@ Config.Respawn = {
 }
 
 Config.UseItemCooldown = 3000
+
+Config.ItemCooldowns = {
+    ['WEAPON_PISTOL_MAUSER'] = 5000
+}
 
 Config.Clothes = {
     boot_accessories = { hash = 0x18729F39, label = "Boot Accessories" },
@@ -1119,6 +1125,7 @@ Config.Text = {
         ['not_allowed_in_slot'] = 'This type of item is not allowed in this slot.',
         ['wrong_arguments'] = 'You have entered incorrect arguments!',
         ['item_not_found'] = 'Item not found!',
+        ['not_valid_quantity'] = 'You have entered an invalid quantity! It must be greater than 0.',
         
     },
 }
@@ -1135,4 +1142,6 @@ function Notify(source, text, type) --You can replace with your own notification
         TriggerEvent("POS-Core:notify", 'USI', text, type, 5000)
     end
 end
+
+
 ```
