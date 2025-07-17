@@ -373,16 +373,6 @@ Config.PlantTypes = {
         { percentage = 50, prop = "crp_tobaccoplant_ab_sim", offset = -1.0 },
         { percentage = 100, prop = "crp_tobaccoplant_ac_sim", offset = -1.0 }
     },
-    ["cannabis"] = {
-        { percentage = 0, prop = "bkr_prop_weed_01_small_01b", offset = -1.65 },
-        { percentage = 50, prop = "bkr_prop_weed_med_01b", offset = -4.2 },
-        { percentage = 100, prop = "bkr_prop_weed_lrg_01b", offset = -4.0 }
-    },
-    ["cannabis_bud"] = {
-        { percentage = 0, prop = "bkr_prop_weed_bud_pruned_01a", offset = -1.05 },
-        { percentage = 50, prop = "bkr_prop_weed_bud_02b", offset = -1.05 },
-        { percentage = 100, prop = "bkr_prop_weed_bud_02a", offset = -1.05 }
-    },
     ["ginseng"] = {
         { percentage = 0, prop = "ginseng_p", offset = -1.25 },
         { percentage = 50, prop = "s_ginseng01x", offset = -1.25 },
@@ -799,5 +789,6 @@ function Notify(source, text, type) --You can replace with your own notification
         TriggerEvent("POS-Core:notify", 'USI', text, type, 5000)
     end
 end
+
 
 ```
