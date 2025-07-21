@@ -48,7 +48,7 @@ Config.Settings = {
 
 
 
-Config.HouseUseKey = true -- If you want players to need a key to enter their house
+Config.HouseUseKey = true -- If you want players to need a key to enter their house, or if you want them to be able to enter without a key (only house owners)
 
 Config.RequireUseItem = false -- If true then the player will need to use an item to unlock the door. If false then the player will be able to unlock the door if the item is in the inventory.
 Config.MenuAlign = 'top-left' -- top-right, top-left, bottom-right, bottom-left

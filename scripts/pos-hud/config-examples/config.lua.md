@@ -25,7 +25,7 @@ Config.HudSettings = { -- Special Values: hour, date, players (players online) |
                     icon = "fa-solid fa-clock",
                     color = "white" 
                 },
-                value = "hour"
+                value = "game_hour" -- or game_hour for the game hour
             },
             
             {
