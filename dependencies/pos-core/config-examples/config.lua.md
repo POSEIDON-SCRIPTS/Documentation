@@ -27,7 +27,7 @@ PlayerSelect = {
 AdminSystem = {
     useDefault = true, -- Use the default admin system
     useIdentifierGroup = false, -- Use the admin group system
-    useAceGroup = false, -- Use the ace group system
+    useAce = false, -- Use the ace group system
 },
 
 IdentifierGroups = {
