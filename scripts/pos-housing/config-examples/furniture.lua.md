@@ -243,6 +243,7 @@ Config.Furniture = {
                 [23] = { item = "p_watertower_med_06", label = "Medium Water Tower 06", prop = "p_watertower_med_06", itemType = "normal", price = 180 },
                 [24] = { item = "p_watertower_med_07", label = "Medium Water Tower 07", prop = "p_watertower_med_07", itemType = "normal", price = 190 },
                 [25] = { item = "p_windmill01x", label = "Windmill", prop = "p_windmill01x", itemType = "normal", price = 220 },
+                [26] = { item = "p_pot_plant_7a", label = "Pot Plant", prop = "p_pot_plant_7a", itemType = "normal", price = 90, offset = vector3(0, 0, -5) },
             }
         },
         
