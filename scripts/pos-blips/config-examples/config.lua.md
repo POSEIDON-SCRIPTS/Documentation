@@ -85,6 +85,12 @@ Config.Commands = {
         },
         Groups = {'Owner', 'Administrator', 'Fondator', 'admin'} 
     },
+    [3] = {
+        Command = 'toggle_debug_blips', -- or false to disable it
+        Description = 'Toggle debug blips on or off.',
+        Parameters = {},
+        Groups = {'owner', 'Administrator', 'Fondator', 'admin'}
+    }
 }
 
 
@@ -143,6 +149,8 @@ Config.Text = {
 
         ['not_allowed'] = "You are not allowed to use this command",
         ['blip_not_found'] = "Blip not found with this ID",
+        ['debug_enabled'] = "Debug mode enabled",
+        ['debug_disabled'] = "Debug mode disabled",
     }
 }
 
