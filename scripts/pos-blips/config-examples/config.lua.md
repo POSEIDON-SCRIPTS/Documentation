@@ -68,6 +68,19 @@ Config.BlipNameInput = {
     }
 }
 
+
+Config.BlipSearchInput = {
+    title = "Search Blip",
+    form = {
+        {
+            label = "Blip Name",
+            id = "name",
+            type = "string",
+            required = false
+        },
+    }
+}
+
 Config.MenuAlign = 'right' -- top-right, top-left, bottom-right, bottom-left
 
 Config.Commands = {
@@ -88,6 +101,12 @@ Config.Commands = {
     [3] = {
         Command = 'toggle_debug_blips', -- or false to disable it
         Description = 'Toggle debug blips on or off.',
+        Parameters = {},
+        Groups = {'owner', 'Administrator', 'Fondator', 'admin'}
+    },
+    [4] = {
+        Command = 'edit_blips', -- or false to disable it
+        Description = 'Edit blips with the specified parameters.',
         Parameters = {},
         Groups = {'owner', 'Administrator', 'Fondator', 'admin'}
     }
@@ -151,6 +170,9 @@ Config.Text = {
         ['blip_not_found'] = "Blip not found with this ID",
         ['debug_enabled'] = "Debug mode enabled",
         ['debug_disabled'] = "Debug mode disabled",
+        ['blip_list'] = 'Blip List',
+        ['blip_desc'] = 'Press to edit the following blip:',
+        ['search_results'] = "Search Results",
     }
 }
 
