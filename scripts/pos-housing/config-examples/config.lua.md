@@ -526,7 +526,7 @@ Config.Text = {
         ['set_price'] = 'Set Price.',
         ['set_price_desc'] = 'Set the price of the house with the specified parameters.',
         ['set_house_type'] = 'Set Type.',
-        ['set_house_type_desc'] = '1 = DEPOSIT | 2 = HOUSE | 3 = FARM | 4 = RANCH | 5 = MANSION',
+        ['set_house_type_desc'] = 'House types are found and taken from the config',
         ['set_main_menu'] = 'Set Main Menu.',
         ['set_main_menu_desc'] = 'Set the main menu location.',
         ['set_locations'] = 'Set Locations.',
