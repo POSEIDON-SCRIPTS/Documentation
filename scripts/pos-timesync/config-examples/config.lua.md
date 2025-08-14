@@ -2,6 +2,7 @@
 
 ```lua
 Config = {
+    Debug = false,
     -- Time synchronization settings
     UseTime = true,  -- Whether to use the in-game time synchronization system (default: true)
     RealTime = false,  -- Whether to use real-world time (false means using a custom day/night cycle)
@@ -12,11 +13,11 @@ Config = {
 
     -- Weather synchronization settings
     UseWeather = true,  -- Whether to use the in-game weather synchronization system (default: true)
-    CityRealWeather = false,  -- City name to fetch real-time weather data (leave as false if you don't want to use real-world weather data)
+    CityRealWeather = 'Bucharest',  -- City name to fetch real-time weather data (leave as false if you don't want to use real-world weather data)
     RealWeatherCache = 180,  -- Time (in seconds) to cache the real-world weather data. Set to 0 or false to disable weather fetching from real-world sources.
 
     -- Default weather pattern settings
-    WeatherPattern = 'Christmas2',  -- Default weather pattern when CityRealWeather is off (e.g., "Apocalypse", "Thunderstorm")
+    WeatherPattern = false,  -- Default weather pattern when CityRealWeather is off (e.g., "Apocalypse", "Thunderstorm")
 
     -- Snow-related settings
     SnowInWeatherSnow = true,  -- If true, snow will cover the ground when the weather is snowy (if weather snow is enabled).
@@ -46,6 +47,17 @@ Config.Commands = {
         },
         Groups = {'Owner', 'Administrator', 'Fondator', 'admin'} 
     },
+    [3] = {
+        Command = 'localTime', -- or false to disable it
+        Description = 'Set the in-game time to your preferred time.',
+        Parameters = {
+            { name="hour", help="Specify the hour to set the time to (0-23)." },
+            { name="minute", help="Specify the minute to set the time to (0-59)." },
+            { name="second", help="Specify the second to set the time to (0-59)." },
+            { name="transition", help="Specify the transition time in milliseconds." },
+        },
+        Groups = {}
+    }
 }
 
 Config.Pattern = {
@@ -234,6 +246,8 @@ Config.Text = {
         ['cannot_use_real_weather'] = 'You cannot use this command while real weather is enabled!',
         ['invalid_weather_type'] = 'You must specify a valid weather type!',
         ['invalid_weather_type_list'] = 'Invalid weather type! Allowed types are: %s',
+        ['time_set_override'] = 'You have set your time to %s %s %s, and will be set in %s ms',
+        ['time_reset_override'] = 'You have reset your time override, and now it will be synced with the server',
     
     },
 }
