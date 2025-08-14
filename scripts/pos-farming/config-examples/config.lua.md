@@ -156,14 +156,14 @@ Config.FertilizerItems = {
 
 Config.BlacklistedCities = {
     'Valentine',
-    'Saint Denis', -- location name from POS-Core Config.Text
+    -- 'Saint Denis', -- location name from POS-Core Config.Text
 }
 
 Config.Settings = {
     harvestPercentage = 50, -- percentage to harvest the plant
     harvestMultiply = 2,     -- amount to multiply the harvest if percentage is 100
     harvestOnlyOwned = true, -- if true, you can only harvest your own plants
-    limit = 5, -- limit of plants per person or false
+    limit = 50, -- limit of plants per person or false
     destroyOnlyOwned = true, -- if true, you can only destroy your own plants
     plantOnlyInZone = true, -- if true, if a plant is in a zone but you are not in the zone, you cannot plant it
     itemRequiredForPlanting = true,
@@ -172,6 +172,7 @@ Config.Settings = {
     minimumWater = 0, -- minimum water for the plant to grow, if the water is below this value, the plant will not grow
     durationPlantDieZeroWater = 1800, -- 30 minutes, time for the plant to die if it has no water or false to disable it
     requireCrouch = false, -- if true, you need to crouch to interact with wagons when holding bucket
+    housePlantAllSeeds = true, -- if true and you are in a house you can plant all the seeds, if false it will respect the zone requirement
 }
 
 Config.Distances = {
@@ -186,6 +187,7 @@ Config.Distances = {
 Config.PlantingItems = {
     ['mini_lopata'] = {
         time = 15000, -- time to plant the plant
+        durability = 1, -- durability of the item or false, when planting it will decrease the durability by 1, when it reaches 0, the item will be destroyed
     }
 }
 
@@ -196,6 +198,7 @@ Config.HarvestingItems = {
             min = 1, -- minimum amount of items to receive
         }, -- bonus items to receive when harvesting the plant with this item in the inventory or false to disable it
         multiply = 2, -- amount to multiply the harvest or false to disable it
+        durability = 1, -- durability of the item or false to disable it, when harvesting it will decrease the durability by 1, when it reaches 0, the item will be destroyed
     },
 }
 
@@ -252,8 +255,8 @@ Config.FertilizerSettings = {
 }
 
 Config.Plants = {
-    ['mdt'] = {
-        item = 'sticla_apa',
+    ['planta_tobacco'] = {
+        item = 'trabuc',
         amount = {
             min = 2,
             max = 5
@@ -498,7 +501,7 @@ Config.WaterWagons = {
 }
 
 Config.DestroyItems = {
-    "matches",
+    "chibrite",
 }
 
 
@@ -774,7 +777,8 @@ Config.Text = {
         ['water_bucket_prompt'] = 'Water bucket. (Uses: %s/%s)',
         ['water_wagon_fully_filled'] = 'The wagon was fully filled and now it has %s water.',
         ['bucket_broken'] = 'The bucket has broken!',
-        ['bucket_desc'] = 'Durability: %s/%s',
+        ['durability'] = 'Durability: %s/%s',
+        ['item_durability_zero'] = 'The item %s does no longer have durability..',
     },
 }
 
@@ -789,6 +793,7 @@ function Notify(source, text, type) --You can replace with your own notification
         TriggerEvent("POS-Core:notify", 'USI', text, type, 5000)
     end
 end
+
 
 
 ```
