@@ -19,6 +19,15 @@ Config.Functions = {
 Config.ZombieSettings = {
     sound = 'https://www.youtube.com/watch?v=z7NJYzvDIVE',
     distance = 25.0,
+    spawnEverywhere = true, -- If true, zombies can spawn anywhere in the world, if false, they will only spawn in specific locations
+    spawnSettings = { -- spawnEverywhere = false
+        distance = 250,
+        maxPerLocation = 80, -- Maximum number of zombies that can spawn in a radius
+        spawnCooldown = 1000, -- cooldown between spawns in milliseconds, per player
+        locations = {
+            vector3(-2917.3730, -2284.0583, 77.8632)
+        }
+    },
     damage = 20, -- damage dealt
     zombieSounds = {
         {
@@ -54,7 +63,10 @@ Config.Distance = {
     coverDistance = -40, -- distance that is added when the player is in cover
 }
 
-Config.DistanceToLoot = 5.0 -- Distance to open the menu
+Config.LootSettings = {
+    deleteAfterLoot = true, -- Delete the zombie or airdrop after looting
+    lootDistance = 2.0, -- Distance to loot the zombie or airdrop
+}
 
 
 Config.ProgressBars = {
@@ -161,6 +173,7 @@ Config.ZoneNameInput = {
 Config.Looting = {
     enabled = true,
     deleteAfterLoot = true,
+    distance = 2.0, -- Distance to loot the zombie 
     chances = {
         money = 30,
         item = 50,
