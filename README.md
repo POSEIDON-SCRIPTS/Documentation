@@ -1,5 +1,23 @@
-# Welcome to our documentation!
+# 👋 Welcome to Our Documentation
 
-Here you will find all the information about our script exports and configuration options. This documentation covers everything you need to get started and customize your experience.
+> **Welcome!**
+>
+> This is your one-stop resource for all script exports, configuration guides, and setup instructions for our products.
 
-**POS-Core** and other dependencies can be found either on our GitHub or by logging into our store with the account used for your purchase. Please note: it may take up to **5-10 minutes** for the **DEPENDENCIES** and **CUSTOMER SCRIPTS** to appear on the Tebex store after purchase. Just make sure you are logged into the correct account.
+---
+
+## 📦 What You'll Find Here
+
+- **Exports**: Detailed documentation for all available script exports.
+- **Configuration**: Step-by-step guides and examples for customizing your scripts.
+- **Dependencies**: Information on required dependencies and how to obtain them.
+
+---
+
+## 🔑 Accessing POS-Core & Dependencies
+
+- **POS-Core** and other dependencies are available on our [GitHub](https://github.com/) or by logging into our store with the account used for your purchase.
+- After purchase, it may take up to **5-10 minutes** for the **DEPENDENCIES** and **CUSTOMER SCRIPTS** to appear on the Tebex store.
+- Ensure you are logged into the correct account to access your downloads.
+
+> ℹ️ **Tip:** If you don't see your scripts right away, please refresh the Tebex store page after a few minutes.
