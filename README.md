@@ -16,7 +16,8 @@
 
 ## 🔑 Accessing POS-Core & Dependencies
 
-- **POS-Core** and other dependencies are available on our [GitHub](https://github.com/POSEIDON-SCRIPTS/dependencies) or by logging into our [store](https://poseidonstudio.tebex.io/) with the account used for your purchase.
+- **POS-Core**, **POS-ProgressBar**, and all **Customer Scripts** are available by logging into our [store](https://poseidonstudio.tebex.io/) with the account used for your purchase.
+- All other dependencies can be found on our [GitHub](https://github.com/POSEIDON-SCRIPTS/dependencies).
 - After purchase, it may take up to **5-10 minutes** for the **DEPENDENCIES** and **CUSTOMER SCRIPTS** to appear on the Tebex store.
 - Ensure you are logged into the correct account to access your downloads.
 
