@@ -1128,6 +1128,8 @@ Config.Controls = {
     Drink = 0x760A9C6F,
     Vomit = 0xB2F377E8,
     BoilWater = 0xE30CD707,
+    FillCanteen = 0xF3830D8E,
+    FillBucket = 0x9959A6F0,
 }
 
 Config.CrouchRequired = true
@@ -1179,6 +1181,80 @@ Config.CanteenItems = {
 
 }
 
+Config.BucketItems = {
+    ['galeata_goala'] = {
+        item = 'galeata',
+        fillDuration = 10000, -- How long it takes to fill the bucket
+    }
+}
+
+Config.ProgressBars = {
+    ['fill_bucket'] = {
+        item = 'galeata_goala', -- Item to be used in the database as image
+        title = 'Filling bucket..',
+        canStop = true,
+        animation = {
+            time = -1,
+            scenario = -2053511979,
+            type = 'scenario',
+        }
+    },
+
+    ['boil_water'] = {
+        item = 'galeata_goala', -- Item to be used in the database as image
+        title = 'Boiling water..',
+        canStop = true,
+        prop = {
+            bone = "SKEL_R_HAND",
+            rotation = {
+                x = 306.0,
+                y = 18.0,
+                z = 0.0
+            },
+            model = "p_cs_canteen_hercule",
+            coords = {
+                x = 0.12,
+                y = 0.09,
+                z = -0.05
+            }
+        },
+
+        animation = {
+            anim = "base",
+            flags = 3,
+            animDict = "mech_dynamic@world_player_dynamic_kneel_ground@cook@knife@searing@base"
+        }
+    },
+
+    ['fill_canteen'] = {
+        item = 'galeata_goala', -- Item to be used in the database as image
+        title = 'Filling canteen..',
+        canStop = true,
+        prop = {
+            bone = "SKEL_R_HAND",
+            rotation = {
+                x = 306.0,
+                y = 18.0,
+                z = 0.0
+            },
+            model = "p_cs_canteen_hercule",
+            coords = {
+                x = 0.12,
+                y = 0.09,
+                z = -0.05
+            }
+        },
+
+        animation = {
+            anim = "idle_a",
+            flags = 3,
+            animDict = "amb_work@world_human_crouch_inspect@male_c@idle_a"
+        }
+        
+        
+    },
+}
+
 Config.WashSettings = {
     enabled = false, -- if you want to enable the soap requirement
     requireAllItems = true, -- if true all items need to be in the inventory
@@ -1215,53 +1291,6 @@ Config.Lang = 'EN' -- YOU NEED TO MODIFY IT TOO IN THE FILE CONFIG.JS FOR THE ME
 
 
 Config.Text = {
-    RO = {
-        ['wash_character'] = 'Spala-te',
-        ['drink_water'] = 'Bea',
-        ['fill_canteen'] = 'Umple Pleosca',
-        ['cannot_wash_clothes'] = 'Nu te poti spala cu hainele pe tine!',
-        ['cannot_drink_mask'] = 'Nu poti bea apa cu o masca pe fata!',
-        ['water_damage_received'] = 'Ai baut apa murdara si ai fost ranit!',
-        ['water_poison_received'] = 'Ai baut apa murdara si ai fost otravit! Trebuie sa vomiti pentru a te vindeca!',
-        ['vomit'] = 'Vomita',
-        ['poison_cured'] = 'Ai fost vindecat! Data urmatoare nu mai bea apa fara sa o incalzesti!',
-        ['not_poisoned'] = 'Nu ai nevoie de acest leac! Nu esti otravit!',
-        ['canteen_empty'] = 'Acest item nu este umplut! Mergi la un lac si colecteaza apa!',
-        ['no_canteen'] = 'Nu ai un obiect de umplut!',
-        ['canteen_filled'] = 'Ai umplut un item cu apa! Utilizari noi: %s',
-        ['canteen_use'] = 'Ai folosit acest obiect! Utilizari ramase: %s.',
-        ['cannot_do_poisoned'] = 'Nu poti face acest lucru cat timp esti otravit!',
-        ['already_drinking'] = 'Deja faci asta! Asteapta sa termini intainte de a face din nou.',
-        ['canteen_description'] = [[
-            <div style="font-family: 'Verdana', sans-serif; padding: 15px; border-radius: 8px; background: linear-gradient(to bottom, #2a3440, #1c252e); color: #fff; box-shadow: 0 3px 10px rgba(0,0,0,0.3); max-width: 300px;">
-            <div style="display: flex; align-items: center; margin-bottom: 12px;">
-                <div style="font-size: 22px; margin-right: 10px;">🧴</div>
-                <div style="font-size: 18px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">Canteen</div>
-            </div>
-            
-            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                <div style="color: #aaa;">Uses Remaining:</div>
-                <div style="font-size: 20px; font-weight: bold; color: #3498db;">%s</div>
-            </div>
-            
-            <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
-                <div style="color: #aaa;">Status:</div>
-                <div style="font-weight: bold; color: %s;">%s</div>
-            </div>
-            
-            <div style="background-color: rgba(255,255,255,0.1); border-left: 4px solid #f39c12; padding: 8px; border-radius: 4px; margin-top: 5px;">
-                <div style="font-size: 13px; color: #f39c12; margin-bottom: 3px; font-weight: bold;">TIP</div>
-                <div style="font-size: 13px;">Always boil your water for safety!</div>
-            </div>
-            </div>
-        ]],
-        ['boil_water'] = 'Fierbe apa',
-        ['no_boil'] = 'Nu ai nimic de fiert!',
-        ['water_boiled'] = 'Ai fiert apa cu succes!',
-        ['boiled'] = 'Fiarta',
-        ['unboiled'] = 'Ne Fiarta',
-        ['no_soap'] = 'Nu ai sapun pentru a te spala!',
-    },
     EN = {
         ['wash_character'] = 'Wash Yourself',
         ['drink_water'] = 'Drink',
@@ -1279,6 +1308,11 @@ Config.Text = {
         ['canteen_use'] = 'You used this item! Remaining uses: %s.',
         ['cannot_do_poisoned'] = 'You cannot do this while poisoned!',
         ['already_drinking'] = 'You are already doing this! Wait until you finish before trying again.',
+        ['fill_bucket'] = 'Fill bucket',
+        ['bucket_filled'] = 'You filled the bucket with water!',
+        ['no_bucket'] = 'You don’t have a bucket to fill!',
+        ['fill_canteen_cancelled'] = 'You have cancelled the filling of the canteen',
+        ['fill_bucket_cancelled'] = 'You have cancelled the filling of the bucket',
         ['canteen_description'] = [[
             <div style="font-family: 'Verdana', sans-serif; padding: 15px; border-radius: 8px; background: linear-gradient(to bottom, #2a3440, #1c252e); color: #fff; box-shadow: 0 3px 10px rgba(0,0,0,0.3); max-width: 300px;">
             <div style="display: flex; align-items: center; margin-bottom: 12px;">
@@ -1308,6 +1342,7 @@ Config.Text = {
         ['boiled'] = 'Boiled',
         ['unboiled'] = 'Unboiled',
         ['no_soap'] = 'You have no soap to wash with!',
+        ['boil_cancelled'] = 'You have cancelled the boiling of the water',
     },
 }
 
