@@ -1204,6 +1204,11 @@ Config.ProgressBars = {
         item = 'galeata_goala', -- Item to be used in the database as image
         title = 'Boiling water..',
         canStop = true,
+        animation = {
+            anim = "base",
+            flags = 3,
+            animDict = "mech_dynamic@world_player_dynamic_kneel_ground@cook@knife@searing@base"
+        },
         prop = {
             bone = "SKEL_R_HAND",
             rotation = {
@@ -1211,19 +1216,13 @@ Config.ProgressBars = {
                 y = 18.0,
                 z = 0.0
             },
-            model = "p_cs_canteen_hercule",
+            model = nil, -- will be set dynamically
             coords = {
                 x = 0.12,
                 y = 0.09,
                 z = -0.05
             }
         },
-
-        animation = {
-            anim = "base",
-            flags = 3,
-            animDict = "mech_dynamic@world_player_dynamic_kneel_ground@cook@knife@searing@base"
-        }
     },
 
     ['fill_canteen'] = {
@@ -1249,10 +1248,55 @@ Config.ProgressBars = {
             anim = "idle_a",
             flags = 3,
             animDict = "amb_work@world_human_crouch_inspect@male_c@idle_a"
-        }
-        
-        
+        },
     },
+
+    ['wash'] = {
+        item = 'galeata_goala', -- Item to be used in the database as image
+        title = 'Washing yourself..',
+        canStop = true,
+        animation = {
+            anim = "idle_l",
+            flags = 17,
+            animDict = "amb_misc@world_human_wash_face_bucket@table@male_a@idle_d"
+        },
+    },
+
+    ['drink_canteen'] = {
+        item = 'galeata_goala', -- Item to be used in the database as image
+        title = 'Drinking water..',
+        canStop = true,
+        animation = {
+            anim = "idle_a",
+            flags = 31,
+            animDict = "amb_rest_drunk@world_human_drinking@male_a@idle_a"
+        },
+        prop = {
+            bone = "SKEL_R_Finger12",
+            rotation = {
+                x = 15.0,
+                y = 175.0,
+                z = 0.0
+            },
+            model = nil, -- will be set dynamically
+            coords = {
+                x = 0.02,
+                y = 0.028,
+                z = 0.001
+            }
+        }        
+    },
+
+    ['drink_normal'] = {
+        item = 'galeata_goala', -- Item to be used in the database as image
+        title = 'Drinking water..',
+        canStop = true,
+        animation = {
+            anim = "idle_h",
+            flags = 31,
+            animDict = "amb_rest_drunk@world_human_bucket_drink@ground@male_a@idle_c"
+        },
+    }
 }
 
 Config.WashSettings = {
