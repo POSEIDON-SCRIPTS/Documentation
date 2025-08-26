@@ -1328,14 +1328,12 @@ Config.ProgressBars = {
     ['fill_bucket_pump'] = {
         item = 'galeata_goala', -- Item to be used in the database as image
         title = 'Filling bucket..',
-        time = 10000,
         animation =  false,
     },
 
     ['fill_canteen_pump'] = {
         item = 'galeata_goala', -- Item to be used in the database as image
         title = 'Filling canteen..',
-        time = 10000,
         animation =  false,
     },
 }
