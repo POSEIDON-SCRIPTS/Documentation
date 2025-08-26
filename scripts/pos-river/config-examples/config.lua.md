@@ -1092,6 +1092,32 @@ Config.WaterLocations = {
 
 }
 
+Config.PumpSettings = {
+    locationConfig = {
+        Active = true,
+        Options = {
+            drink = true,
+            shower = true,
+            items = true,
+        },
+        WaterSettings = {
+            increase = 25,
+            duration = 10000,
+            damage = {
+                enabled = true,
+                chance = 50,
+                value = 50,
+            },
+            poison = {
+                enabled = true,
+                chance = 50,
+                value = 5,
+                interval = {15000, 60000},
+            }
+        },
+    }
+}
+
 Config.ObejectTypes = {
     ["p_barrel_wash01x"] = {
         locationConfig = {
@@ -1184,6 +1210,7 @@ Config.CanteenItems = {
 Config.BucketItems = {
     ['galeata_goala'] = {
         item = 'galeata',
+        model = 'p_bucket01x',
         fillDuration = 10000, -- How long it takes to fill the bucket
     }
 }
@@ -1296,7 +1323,21 @@ Config.ProgressBars = {
             flags = 31,
             animDict = "amb_rest_drunk@world_human_bucket_drink@ground@male_a@idle_c"
         },
-    }
+    },
+
+    ['fill_bucket_pump'] = {
+        item = 'galeata_goala', -- Item to be used in the database as image
+        title = 'Filling bucket..',
+        time = 10000,
+        animation =  false,
+    },
+
+    ['fill_canteen_pump'] = {
+        item = 'galeata_goala', -- Item to be used in the database as image
+        title = 'Filling canteen..',
+        time = 10000,
+        animation =  false,
+    },
 }
 
 Config.WashSettings = {
@@ -1387,6 +1428,7 @@ Config.Text = {
         ['unboiled'] = 'Unboiled',
         ['no_soap'] = 'You have no soap to wash with!',
         ['boil_cancelled'] = 'You have cancelled the boiling of the water',
+        ['water_pump'] = 'Water Pump',
     },
 }
 
