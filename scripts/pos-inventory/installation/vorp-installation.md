@@ -138,58 +138,6 @@ Before proceeding with the installation, you must import the required database s
 
 </details>
 
-<details>
-
-<summary><strong>🗄️ Step 5.1: Backup and Prepare Database Tables</strong></summary>
-
-{% hint style="danger" %}
-**Critical Database Step**: You must backup and prepare the loadout table before proceeding!
-{% endhint %}
-
-Before renaming the POS-Inventory folder, you need to backup and prepare your database:
-
-#### Backup the Loadout Table
-
-1. **Open** your database management tool (phpMyAdmin, HeidiSQL, etc.)
-2. **Select** your server's database
-3. **Export/Backup** the `loadout` table:
-
-**Using phpMyAdmin:**
-- Navigate to the `loadout` table
-- Click "Export" at the top
-- Choose "SQL" format and click "Go"
-- Save the backup file in a safe location
-
-**Using HeidiSQL:**
-- Right-click on the `loadout` table
-- Select "Export database as SQL"
-- Save the backup file
-
-#### Truncate the Loadout Table
-
-After backing up the table, you need to clear it:
-
-1. **Execute** the following command in your database:
-
-```sql
-TRUNCATE TABLE `loadout`;
-```
-
-{% hint style="warning" %}
-**Important**: This command will permanently delete all data from the loadout table. Make sure you have completed the backup step above before executing this command.
-{% endhint %}
-
-#### Verify the Operation
-
-1. **Check** that the `loadout` table is now empty
-2. **Confirm** your backup file was created successfully
-3. **Keep** the backup file safe for potential restoration
-
-{% hint style="info" %}
-**Why This Step is Necessary**: Truncating ensures a clean slate for the new system to populate correctly.
-{% endhint %}
-
-</details>
 
 <details>
 
@@ -372,6 +320,60 @@ Config.ImportInventoryVORP = false
 ```
 
 9. **Restart** your server again
+
+</details>
+
+
+<details>
+
+<summary><strong>🗄️ Step 13: Backup and Prepare Database Tables</strong></summary>
+
+{% hint style="danger" %}
+**Critical Database Step**: You must backup and prepare the loadout table before proceeding!
+{% endhint %}
+
+Before renaming the POS-Inventory folder, you need to backup and prepare your database:
+
+#### Backup the Loadout Table
+
+1. **Open** your database management tool (phpMyAdmin, HeidiSQL, etc.)
+2. **Select** your server's database
+3. **Export/Backup** the `loadout` table:
+
+**Using phpMyAdmin:**
+- Navigate to the `loadout` table
+- Click "Export" at the top
+- Choose "SQL" format and click "Go"
+- Save the backup file in a safe location
+
+**Using HeidiSQL:**
+- Right-click on the `loadout` table
+- Select "Export database as SQL"
+- Save the backup file
+
+#### Truncate the Loadout Table
+
+After backing up the table, you need to clear it:
+
+1. **Execute** the following command in your database:
+
+```sql
+TRUNCATE TABLE `loadout`;
+```
+
+{% hint style="warning" %}
+**Important**: This command will permanently delete all data from the loadout table. Make sure you have completed the backup step above before executing this command.
+{% endhint %}
+
+#### Verify the Operation
+
+1. **Check** that the `loadout` table is now empty
+2. **Confirm** your backup file was created successfully
+3. **Keep** the backup file safe for potential restoration
+
+{% hint style="info" %}
+**Why This Step is Necessary**: Truncating ensures a clean slate for the new system to populate correctly.
+{% endhint %}
 
 </details>
 
