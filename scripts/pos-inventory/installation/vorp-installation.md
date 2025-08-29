@@ -351,20 +351,6 @@ Before renaming the POS-Inventory folder, you need to backup and prepare your da
 - Select "Export database as SQL"
 - Save the backup file
 
-#### Truncate the Loadout Table
-
-After backing up the table, you need to clear it:
-
-1. **Execute** the following command in your database:
-
-```sql
-TRUNCATE TABLE `loadout`;
-```
-
-{% hint style="warning" %}
-**Important**: This command will permanently delete all data from the loadout table. Make sure you have completed the backup step above before executing this command.
-{% endhint %}
-
 #### Verify the Operation
 
 1. **Check** that the `loadout` table is now empty
