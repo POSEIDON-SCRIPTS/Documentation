@@ -409,5 +409,16 @@ Config.FunctionOverrides = {
     --         pants = {hash = 98765, tint = 2}
     --     } -- Example: Return sample clothes data
     -- end,
+
+--     GetGold = function (source)
+--         return 0
+--     end,
+--     GiveGold = function (source, amount)
+--         return
+--     end,
+
+--     RemoveGold = function (source, amount)
+--         return
+--     end,
 }
 ```

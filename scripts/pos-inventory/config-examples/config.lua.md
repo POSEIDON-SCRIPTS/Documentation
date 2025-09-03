@@ -12,9 +12,10 @@ Config.InventoryUpdateRange = 20.0
 
 Config.RemoveDroppedItemsAfter = false
 
-Config.RemoveItemsZeroPercent = true
+Config.RemoveItemsZeroPercent = false
 
 Config.Debug = false
+Config.EnableAmmoItems = true -- NEW
 
 Config.RSG = false
 Config.RSGStores = false
@@ -25,7 +26,7 @@ Config.ItemsInDatabaseVORP = true -- If you want to use items in database, set t
 Config.UseLoadoutTableVORP = true -- If you want to use loadout table, set this to true. (This will make sure weapon scripts are working properly)
 
 
-Config.MoneyItem = "bani" -- Item name for money (used in the main inventory)
+Config.MoneyItem = 'bani' -- Item name for money (used in the main inventory)
 
 Config.Commands = {
     [1] = {
@@ -925,12 +926,12 @@ Config.AmmoTypes = {
 }
 
 
-Config.GiveMoneyInput = {
-    title = "Ofera bani.",
+Config.AmountInput = {
+    title = "Enter amount.",
     form = {
         {
-            label = "Bani",
-            id = "money",
+            label = "Amount",
+            id = "amount",
             type = "float",
         },
 
@@ -1010,6 +1011,11 @@ Config.Webhooks = {
         nonSensitive = true,
     },
 
+    giveGold = {
+        sensitive = '',
+        nonSensitive = true,
+    },
+
     giveItem = {
         sensitive = '',
         nonSensitive = true,
@@ -1068,6 +1074,9 @@ Config.Text = {
         ['inventory_item_not_allowed'] = 'You cannot move this item!',
         ['ground_inventory'] = 'Ground',
         ['sell_for'] = 'You can sell for: $%s',
+        ['not_enough_gold'] = 'You do not have enough gold!',
+        ['received_gold'] = 'You received %s gold',
+        ['gave_gold'] = 'You gave %s gold',
         
 
         -- Webhooks
@@ -1089,6 +1098,14 @@ Config.Text = {
 
         ['webhook_dropItem'] = 'Item Dropped',
         ['webhook_dropItem_info'] = '%s has dropped %s x%s.',
+
+        ['webhook_giveGold'] = 'Gold Transfer',
+        ['webhook_giveGold_info'] = '%s has transferred %s gold to %s.',
+        ['webhook_gold_amount'] = 'Amount',
+        ['webhook_gold_source'] = 'Sender',
+        ['webhook_gold_target'] = 'Receiver',
+
+
 
         ['webhook_pickupItem'] = 'Item Picked Up',
         ['webhook_pickupItem_info'] = '%s has picked up %s x%s.',
@@ -1126,7 +1143,7 @@ Config.Text = {
         ['wrong_arguments'] = 'You have entered incorrect arguments!',
         ['item_not_found'] = 'Item not found!',
         ['not_valid_quantity'] = 'You have entered an invalid quantity! It must be greater than 0.',
-        
+        ['loading_inventory'] = 'The inventory script is still loading, wait a few seconds before opening it!',
     },
 }
 
