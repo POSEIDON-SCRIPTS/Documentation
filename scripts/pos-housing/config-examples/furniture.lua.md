@@ -4,6 +4,8 @@
 Config.Furniture = {
     distance = 400,
     max = 50,
+
+    interactOnlyInHouse = false, -- if true, then you need to be a tenant or owner of the house to interact with furniture
     
     returnToPlayer = true, -- return money to player when selling furniture or item 
     returnMoneyPercentage = 0.5, -- 0.5 = 50%
@@ -11,7 +13,7 @@ Config.Furniture = {
 
     Actions = {
         crafting = function()
-
+            -- TriggerEvent('POS-Craft:Client:OpenBook', id) -- key from pos craft config
         end,
         
         outfit = function()
