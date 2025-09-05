@@ -16,6 +16,7 @@ Config.RemoveItemsZeroPercent = false
 
 Config.Debug = false
 Config.EnableAmmoItems = true -- NEW
+Config.UseRawKeys = false -- if you want to use the new raw keys system (only if you know what you are doing)
 
 Config.RSG = false
 Config.RSGStores = false
@@ -25,6 +26,10 @@ Config.UseMaxWeightVORP = true -- If you want to use max weight from config, set
 Config.ItemsInDatabaseVORP = true -- If you want to use items in database, set this to true. If you want to use items in config, set this to false.
 Config.UseLoadoutTableVORP = true -- If you want to use loadout table, set this to true. (This will make sure weapon scripts are working properly)
 
+
+Config.HotBarSettings = {
+    giveAmmoOnRemove = true, -- Give ammo back when removing a weapon from hotbar
+}
 
 Config.MoneyItem = 'bani' -- Item name for money (used in the main inventory)
 
@@ -84,6 +89,7 @@ Config.Respawn = {
 
     Money = { 
         JobWhitelist = {},
+        Enable = true,
         RemoveAll = false,
         PartMoney = 0.5 -- 50%
     }, 
