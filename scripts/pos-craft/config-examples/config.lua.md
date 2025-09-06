@@ -399,6 +399,7 @@ Config.Recipes = {
                 },
                 bone = 'SKEL_R_Finger13',
                 subprop = {
+                    bone = 'SKEL_R_Finger13',
                     model = 'p_redefleshymeat01xa',
                     coords = {
                         x = 0.00,
