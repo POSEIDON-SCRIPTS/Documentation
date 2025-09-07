@@ -21,6 +21,10 @@ Config.BuySlotInput = {
     }
 }
 
+Config.Settings = {
+    disableUpgradeGame = false, -- Disable the upgrade option in the game, useful if you want to make it available via external scripts.
+}
+
 Config.DiscordWebhooks = true -- ENABLE or DISABLE **ALL** discord webhooks. (True or false)
 
 Config.Webhooks = {
@@ -446,5 +450,7 @@ function Notify(source, text, type) --You can replace with your own notification
         TriggerEvent("POS-Core:notify", 'USI', text, type, 5000)
     end
 end
+
+
 
 ```
