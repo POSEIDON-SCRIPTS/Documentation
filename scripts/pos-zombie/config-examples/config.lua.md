@@ -19,6 +19,7 @@ Config.Functions = {
 Config.ZombieSettings = {
     sound = 'https://www.youtube.com/watch?v=z7NJYzvDIVE',
     distance = 25.0,
+    distanceCooldown = 5000, -- time to reset the sound so zombies will not forget instantly
     spawnEverywhere = true, -- If true, zombies can spawn anywhere in the world, if false, they will only spawn in specific locations
     spawnSettings = { -- spawnEverywhere = false
         distance = 250,
@@ -124,6 +125,14 @@ Config.Commands = {
         Description = 'Spawn an airdrop on the map.',
         Parameters = {},
         Groups = {'Owner', 'Administrator', 'Fondator', 'admin'} 
+    },
+    [4] = {
+        Command = "spawn_zombies", -- or false to disable it
+        Description = "Spawn zombies at the player's location.",
+        Parameters = {
+            { name="amount", help="Number of zombies to spawn." },
+        },
+        Groups = {'Owner', 'Administrator', 'Fondator', 'admin'}
     }
 }
 
@@ -192,10 +201,8 @@ Config.Looting = {
     }
 }
 
-
-Config.SearchPlayers = {
-    enabled = true, -- Enable or disable the search players feature
-    distance = 1.0, -- Distance to search players
+Config.WhitelistedWeapons = { -- Weapons that will not attract zombies when fired
+    "WEAPON_BOW", 
 }
 
 Config.AirDrops = {
@@ -299,6 +306,9 @@ Config.Text = {
         ['airdrop_not_exist'] = 'The airdrop does not exist.',
         ['airdrop_title'] = 'Supply Airdrop',
         ['airdrop_notification'] = 'An airdrop has been spotted. Check your map for its location!',
+        ['invalid_amount'] = 'The amount you entered was invalid!',
+        ['no_zombies_spawned'] = 'There was a problem spawning the zombies, try again later!',
+        ['spawned_zombies'] = '%s zombies were spawned at your location'
     },
 }
 
