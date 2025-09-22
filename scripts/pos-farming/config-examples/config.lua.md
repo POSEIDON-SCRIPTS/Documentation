@@ -266,14 +266,26 @@ Config.Plants = {
             fertilizer = false,
         },
         removeAfterHarvest = true, 
+
+        jobs = { -- if you want to restrict a plant to a specific job, otherwise set to false
+            'tobacco_farmer'
+        },
+
+        serverCheck = function (source, item) -- if false, you need to add a notification too in the serverCheck
+            return true
+        end,
+
+        clientCheck = function (item) -- item = seed name
+            return true
+        end,
         
         time = 900, -- 15 minutes
         type = 'tobacco',
         description = 'Premium tobacco plants that produce high-quality leaves for processing.',
         seedChance = 35,
         temp = {
-            min = 15,
-            max = 35,
+            min = 0,
+            max = 100,
         },
         defaultValues = {
             water = 10,
@@ -501,7 +513,9 @@ Config.WaterWagons = {
 }
 
 Config.DestroyItems = {
-    "chibrite",
+    ["chibrite"] = {
+        durability = 100,
+    }
 }
 
 
@@ -779,6 +793,7 @@ Config.Text = {
         ['bucket_broken'] = 'The bucket has broken!',
         ['durability'] = 'Durability: %s/%s',
         ['item_durability_zero'] = 'The item %s does no longer have durability..',
+        ['job_cannot_plant'] = 'You cannot plant this, your job does not allow you to plant it.',
     },
 }
 
