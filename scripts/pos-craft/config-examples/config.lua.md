@@ -69,6 +69,12 @@ Config.CraftMenus = {
             2
         },
 
+        blip = {
+            blip = 'blip_ambient_warp',
+            scale = 0.5,
+            modifier = false,
+        },
+
         props = {
             "p_campfire01x",
             "p_campfire_win2_smolder01x",
