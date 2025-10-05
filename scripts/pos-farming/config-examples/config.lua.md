@@ -148,7 +148,7 @@ Config.BucketItems = {
     }
 }
 
-Config.BucketSettings = {    
+Config.BucketSettings = {  -- or false to go back to the scenario
     prop = "p_waterbucket01x", 
     bone = "SKEL_R_HAND", 
 
