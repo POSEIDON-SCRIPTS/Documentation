@@ -23,7 +23,7 @@ Config.Functions = {
     end
 }
 
-
+Config.Debug = true -- ENABLE or DISABLE debug prints. (True or false)
 
 Config.DiscordWebhooks = true -- ENABLE or DISABLE **ALL** discord webhooks. (True or false)
 
@@ -148,6 +148,24 @@ Config.BucketItems = {
     }
 }
 
+Config.BucketSettings = {    
+    prop = "p_waterbucket01x", 
+    bone = "SKEL_R_HAND", 
+
+    position = {
+        x = 0.05,   -- forward/back
+        y = 0.03,   -- left/right
+        z = -0.07, -- up/down
+    },
+
+    rotation = {
+        x = -60.0,   -- pitch
+        y = -19.0,  -- roll
+        z = 90.0,   -- yaw
+    },
+}
+
+
 Config.FertilizerItems = {
     ['fertilizant'] = {
         value = 50, -- fertilizer to increase
@@ -187,7 +205,7 @@ Config.Distances = {
 Config.PlantingItems = {
     ['mini_lopata'] = {
         time = 15000, -- time to plant the plant
-        durability = 1, -- durability of the item or false, when planting it will decrease the durability by 1, when it reaches 0, the item will be destroyed
+        durability = 10, -- durability of the item or false, when planting it will decrease the durability by 1, when it reaches 0, the item will be destroyed
     }
 }
 
@@ -198,7 +216,7 @@ Config.HarvestingItems = {
             min = 1, -- minimum amount of items to receive
         }, -- bonus items to receive when harvesting the plant with this item in the inventory or false to disable it
         multiply = 2, -- amount to multiply the harvest or false to disable it
-        durability = 1, -- durability of the item or false to disable it, when harvesting it will decrease the durability by 1, when it reaches 0, the item will be destroyed
+        durability = 100, -- durability of the item or false to disable it, when harvesting it will decrease the durability by 1, when it reaches 0, the item will be destroyed
     },
 }
 
