@@ -4,7 +4,7 @@
 Config = {}
 
 Config.Functions = {
-    ['rainCheck'] = function()
+    ['rainCheck'] = function(region)
         local rainWeathers = {
             ["rain"] = true,
             ["shower"] = true,
@@ -15,7 +15,8 @@ Config.Functions = {
         }
 
         local type = exports.weathersync:getWeather():lower()
-
+        -- local type =  exports['POS-TimeSync']:GetWeather(region)
+        -- type = type and type:lower() or 'clear'
         return rainWeathers[type] or false
     end,
     ['harvest_plant'] = function (source) -- in case you want to implement a system, like give xp etc.
@@ -302,7 +303,7 @@ Config.Plants = {
         description = 'Premium tobacco plants that produce high-quality leaves for processing.',
         seedChance = 35,
         temp = {
-            min = 0,
+            min = -100,
             max = 100,
         },
         defaultValues = {
@@ -679,6 +680,7 @@ Config.ProgressBars = {
 
 Config.Resources = {
     ['POS-Housing'] = true,
+    ['POS-TimeSync'] = true,
 }
 
 
