@@ -28,9 +28,10 @@ TR = {
 
 USEPROGRESS = true;
 
-BOODYTYPE = 1 // 1 FOR CLOTHES 2 FOR CRAFTING
+BOODYTYPE = 2; // 1 FOR CLOTHES 2 FOR CRAFTING
+BUFFER_SLOTS = 20;
 
-IMAGEPATH = "img/items/" 
+IMAGEPATH = "img/items/";
 /*
     VORP: "img/items/"
     RSG: "images/"

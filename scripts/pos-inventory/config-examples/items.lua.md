@@ -8,6 +8,7 @@ Config.Items = {
         metadata = {}, -- Default item metadata or nil or empty table
         canRemove = true,
         canUse = true,
+        image = 'test.png'
     },
     
 }

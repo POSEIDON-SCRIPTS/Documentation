@@ -65,8 +65,8 @@ Config.NewPlayers = {
 Config.Recipes = {
     ["applejuice"] = {
         input = {
-            [1] = { item = "porumb", amount = 1 },
-            [4] = { item = "cheie_cufar", amount = 1 },
+            [1] = { item = "bacon", amount = 1 },
+            [4] = { item = "banana", amount = 1 },
             [3] = nil,
             [2] = nil,
             [5] = nil,
@@ -76,7 +76,7 @@ Config.Recipes = {
             [9] = nil,
         },
         output = {
-            item = "sticla_apa",
+            item = "bbears",
             amount = 1,
         }
 
@@ -681,7 +681,7 @@ Config.AmmoItems = {
         amount = 1,
         type = "AMMO_TOMAHAWK",
         primary = true,
-        weapons = {"WEAPON_THROWN_TOMAHAWK"},
+        weapons = {},
         natives = {},
     },
 
@@ -956,7 +956,7 @@ Config.StorePriceInput = {
     }
 }
 
-Config.UseAmmoInput = {
+Config.UseAmmoInput = { -- or false
     title = "Cate gloante doresti sa despachetezi?",
     form = {
         {
@@ -1150,6 +1150,7 @@ Config.Text = {
         ['item_not_found'] = 'Item not found!',
         ['not_valid_quantity'] = 'You have entered an invalid quantity! It must be greater than 0.',
         ['loading_inventory'] = 'The inventory script is still loading, wait a few seconds before opening it!',
+        ['item_limit_reached'] = 'You have reached the limit for this item!',
     },
 }
 
