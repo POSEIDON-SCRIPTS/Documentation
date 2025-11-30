@@ -149,23 +149,24 @@ Config.BucketItems = {
     }
 }
 
-Config.BucketSettings = {  -- or false to go back to the scenario
-    prop = "p_waterbucket01x", 
-    bone = "SKEL_R_HAND", 
+-- Config.BucketSettings = {  -- or false to go back to the scenario
+--     prop = "p_waterbucket01x", 
+--     bone = "SKEL_R_HAND", 
 
-    position = {
-        x = 0.05,   -- forward/back
-        y = 0.03,   -- left/right
-        z = -0.07, -- up/down
-    },
+--     position = {
+--         x = 0.05,   -- forward/back
+--         y = 0.03,   -- left/right
+--         z = -0.07, -- up/down
+--     },
 
-    rotation = {
-        x = -60.0,   -- pitch
-        y = -19.0,  -- roll
-        z = 90.0,   -- yaw
-    },
-}
+--     rotation = {
+--         x = -60.0,   -- pitch
+--         y = -19.0,  -- roll
+--         z = 90.0,   -- yaw
+--     },
+-- }
 
+Config.BucketSettings = false
 
 Config.FertilizerItems = {
     ['fertilizant'] = {
@@ -206,7 +207,7 @@ Config.Distances = {
 Config.PlantingItems = {
     ['mini_lopata'] = {
         time = 15000, -- time to plant the plant
-        durability = 10, -- durability of the item or false, when planting it will decrease the durability by 1, when it reaches 0, the item will be destroyed
+        durability = 2, -- durability of the item or false, when planting it will decrease the durability by 1, when it reaches 0, the item will be destroyed
     }
 }
 
@@ -598,7 +599,11 @@ Config.ProgressBars = {
         item = 'galeata_goala', -- Item to be used in the database as image
         title = 'Filling bucket..',
         time = 10000,
-        animation =  false,
+        animation =  {
+            anim = "idle_a",
+            flags = 1,
+            animDict = "amb_work@prop_human_pump_water@female_b@idle_a"
+        },
     },
     ['water_plant'] = {
         item = 'galeata_goala', -- Item to be used in the database as image
