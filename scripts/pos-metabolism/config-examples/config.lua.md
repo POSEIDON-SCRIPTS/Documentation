@@ -33,6 +33,11 @@ Config.DiscordWebhooks = true -- ENABLE or DISABLE **ALL** discord webhooks. (Tr
 
 Config.OptOut = false -- Opt out when toggling a hud setting. 
 
+Config.NotificationSettings = {
+    peedHimself = true, -- Notify when the player peed himself
+    poopedHimself = true, -- Notify when the player pooped himself
+}
+
 Config.Webhooks = {
     DefaultWebhook = '', -- Default webhook for all deposits
 
@@ -194,6 +199,7 @@ Config.HudSettings = {
 
     alcohol = {
         enabled = true,
+        
         levels = {
             {
                 value = 20,
@@ -216,10 +222,10 @@ Config.HudSettings = {
                 disableRun = true,
                 disableJump = true,
                 fall = {
-                    chance = 25,
+                    chance = 100,
                     getUpChance = 0,
                     actionInterval = {20000, 30000},
-                    sleepChance = 40, 
+                    sleepChance = 100, 
                     sleepDuration = {10000, 20000},
 
                     interval = {10000, 20000},
@@ -335,6 +341,7 @@ Config.Text = {
         ['cleaned_poop'] = 'You cleaned up the poop successfully!',
         ['ui_shown'] =  'The UI is now shown!',
         ['ui_hidden'] = 'The UI is now hidden!',
+        ['durability'] = 'Durability: %s/%s',
     }
 
 }
@@ -397,29 +404,29 @@ Config.Items = {
             -- false or table
         },
 
-        poison = { -- false or table
-            chance = 50, -- chance to get poisoned
-            duration = 10000, -- time in ms (5000 = 5 seconds)
-            durationAction = 1000, -- time in ms (5000 = 5 seconds). Every how many seconds to do damage 
-            damage = 10,
-            actions = {
-                disableJump = true,
+        -- poison = { -- false or table
+        --     chance = 50, -- chance to get poisoned
+        --     duration = 10000, -- time in ms (5000 = 5 seconds)
+        --     durationAction = 1000, -- time in ms (5000 = 5 seconds). Every how many seconds to do damage 
+        --     damage = 10,
+        --     actions = {
+        --         disableJump = true,
 
-                disableRun = true,
+        --         disableRun = true,
 
-                fall = {
-                    chance = 50,
-                    getUpChance = 0,
-                    actionInterval = {20000, 30000},
-                    sleepChance = 40, 
-                    sleepDuration = {10000, 20000},
-                    interval = {10000, 20000},
-                },
-                drunk = true,
-            },
+        --         fall = {
+        --             chance = 50,
+        --             getUpChance = 0,
+        --             actionInterval = {20000, 30000},
+        --             sleepChance = 40, 
+        --             sleepDuration = {10000, 20000},
+        --             interval = {10000, 20000},
+        --         },
+        --         drunk = true,
+        --     },
             
-            effect = 'MP_Region',
-        },
+        --     effect = 'MP_Region',
+        -- },
 
         horseStats = {
             stamina = 0,
@@ -432,7 +439,7 @@ Config.Items = {
 
         itemUse = {
             removeItem = true,
-            durability = 1,
+            durability = 10,
             returnOnRemove = true, -- return items only if the item is removed
             returnItems = {
                 ["sticla_goala"] = {
@@ -441,6 +448,14 @@ Config.Items = {
                 },
             },
             requireAdditionalItems = false,
+            -- requireAdditionalItems = {
+            --     items = {
+            --         ["pahar"] = {
+            --             count = 1,
+            --             remote = true,
+            --         },
+            --     },
+            -- }
         },
 
         animation = "drink",
