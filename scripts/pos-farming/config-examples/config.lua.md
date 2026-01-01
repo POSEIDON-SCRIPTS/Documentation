@@ -149,24 +149,24 @@ Config.BucketItems = {
     }
 }
 
--- Config.BucketSettings = {  -- or false to go back to the scenario
---     prop = "p_waterbucket01x", 
---     bone = "SKEL_R_HAND", 
+Config.BucketSettings = {  -- or false to go back to the scenario
+    prop = "p_waterbucket01x", 
+    bone = "SKEL_R_HAND", 
 
---     position = {
---         x = 0.05,   -- forward/back
---         y = 0.03,   -- left/right
---         z = -0.07, -- up/down
---     },
+    position = {
+        x = 0.05,   -- forward/back
+        y = 0.03,   -- left/right
+        z = -0.07, -- up/down
+    },
 
---     rotation = {
---         x = -60.0,   -- pitch
---         y = -19.0,  -- roll
---         z = 90.0,   -- yaw
---     },
--- }
+    rotation = {
+        x = -60.0,   -- pitch
+        y = -19.0,  -- roll
+        z = 90.0,   -- yaw
+    },
+}
 
-Config.BucketSettings = false
+-- Config.BucketSettings = false
 
 Config.FertilizerItems = {
     ['fertilizant'] = {
@@ -283,7 +283,7 @@ Config.Plants = {
         },
         required = {
             water = true,
-            fertilizer = false,
+            fertilizer = true,
         },
         removeAfterHarvest = true, 
 
@@ -555,10 +555,25 @@ Config.ProgressBars = {
         item = 'galeata_goala', -- Item to be used in the database as image
         title = 'Filling bucket..',
         time = 10000,
+        prop = {
+            bone = "PH_R_Hand",
+            rotation = {
+                X = 0.0,
+                Y = 0.0,
+                Z = 0.0
+            },
+            model = "p_bucket02x",
+            coords = {
+                x = 0.0,
+                y = 0.0,
+                z = 0.0
+            }
+        },
+
         animation = {
-            time = -1,
-            scenario = -2053511979,
-            type = 'scenario',
+            anim = "base",
+            flags = 1,
+            animDict = "amb_camp@world_camp_jack_es@bucket_fill@male_a@base"
         }
     },
 
@@ -577,10 +592,25 @@ Config.ProgressBars = {
         item = 'galeata_goala', -- Item to be used in the database as image
         title = 'Filling bucket..',
         time = 10000,
+        prop = {
+            bone = "PH_R_Hand",
+            rotation = {
+                X = 0.0,
+                Y = 0.0,
+                Z = 0.0
+            },
+            model = "p_bucket02x",
+            coords = {
+                x = 0.0,
+                y = 0.0,
+                z = 0.0
+            }
+        },
+
         animation = {
-            time = -1,
-            scenario = -2053511979,
-            type = 'scenario',
+            anim = "base",
+            flags = 1,
+            animDict = "amb_camp@world_camp_jack_es@bucket_fill@male_a@base"
         }
     },
 
@@ -588,10 +618,25 @@ Config.ProgressBars = {
         item = 'galeata_goala', -- Item to be used in the database as image
         title = 'Filling bucket..',
         time = 30000,
+        prop = {
+            bone = "PH_R_Hand",
+            rotation = {
+                X = 0.0,
+                Y = 0.0,
+                Z = 0.0
+            },
+            model = "p_bucket02x",
+            coords = {
+                x = 0.0,
+                y = 0.0,
+                z = 0.0
+            }
+        },
+
         animation = {
-            time = -1,
-            scenario = -2053511979,
-            type = 'scenario',
+            anim = "base",
+            flags = 1,
+            animDict = "amb_camp@world_camp_jack_es@bucket_fill@male_a@base"
         }
     },
 
@@ -610,11 +655,24 @@ Config.ProgressBars = {
         title = 'Watering',
         time = 10000,
         animation = {
-            time = -1,
-            scenario = -634535025,
-            type = 'scenario',
-            
-        }
+            anim = "base",
+            flags = 1,
+            animDict = "amb_camp@world_camp_jack_es_bucket_pour@male_a@base"
+        },
+        prop = {
+            bone = "PH_R_Hand",
+            rotation = {
+                X = 0.0,
+                Y = 0.0,
+                Z = 0.0
+            },
+            model = "p_bucket02x",
+            coords = {
+                x = 0.0,
+                y = 0.0,
+                z = 0.0
+            }
+        },
     },
     ['plant'] = {
         item = 'galeata_goala', -- Item to be used in the database as image
@@ -651,10 +709,25 @@ Config.ProgressBars = {
         time = 10000,
         animation = {
             time = -1,
-            scenario = "WORLD_HUMAN_FEED_CHICKEN",
-            type = 'scenario',
+            flags = 1,
+            anim = "base",
+            animDict = 'amb_work@world_human_feed_chickens@female_a@base',
             
-        }
+        },
+        prop = {
+            bone = "CH_L_Hand",
+            rotation = {
+                x = -74.0,
+                y = 0.0,
+                z = 5.0
+            },
+            model = "p_concretesack01x",
+            coords = {
+                x = 0.1,
+                y = -0.18,
+                z = 0.18
+            }
+        },
     },
 
     ['harvest_plant'] = {
